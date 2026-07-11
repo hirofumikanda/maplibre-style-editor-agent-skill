@@ -1,0 +1,546 @@
+{
+  "layout_line": {
+    "line-cap": {
+      "type": "enum",
+      "values": {
+        "butt": {
+          "doc": "A cap with a squared-off end which is drawn to the exact endpoint of the line."
+        },
+        "round": {
+          "doc": "A cap with a rounded end which is drawn beyond the endpoint of the line at a radius of one-half of the line's width and centered on the endpoint of the line."
+        },
+        "square": {
+          "doc": "A cap with a squared-off end which is drawn beyond the endpoint of the line at a distance of one-half of the line's width."
+        }
+      },
+      "default": "butt",
+      "doc": "The display of line endings.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "5.22.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/4194",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/4194"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "line-join": {
+      "type": "enum",
+      "values": {
+        "bevel": {
+          "doc": "A join with a squared-off end which is drawn beyond the endpoint of the line at a distance of one-half of the line's width."
+        },
+        "round": {
+          "doc": "A join with a rounded end which is drawn beyond the endpoint of the line at a radius of one-half of the line's width and centered on the endpoint of the line."
+        },
+        "miter": {
+          "doc": "A join with a sharp, angled corner which is drawn with the outer sides beyond the endpoint of the path until they meet."
+        }
+      },
+      "default": "miter",
+      "doc": "The display of lines when joining.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.40.0",
+          "android": "5.2.0",
+          "ios": "3.7.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "line-miter-limit": {
+      "type": "number",
+      "default": 2,
+      "doc": "Used to automatically convert miter joins to bevel joins for sharp angles.",
+      "requires": [
+        {
+          "line-join": "miter"
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "5.22.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/4194",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/4194"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "line-round-limit": {
+      "type": "number",
+      "default": 1.05,
+      "doc": "Used to automatically convert round joins to miter joins for shallow angles.",
+      "requires": [
+        {
+          "line-join": "round"
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "5.22.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/4194",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/4194"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "line-sort-key": {
+      "type": "number",
+      "doc": "Sorts features in ascending order based on this value. Features with a higher sort key will appear above features with a lower sort key.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "1.2.0",
+          "android": "9.1.0",
+          "ios": "5.8.0"
+        },
+        "data-driven styling": {
+          "js": "1.2.0",
+          "android": "9.1.0",
+          "ios": "5.8.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "visibility": {
+      "type": "enum",
+      "values": {
+        "visible": {
+          "doc": "The layer is shown."
+        },
+        "none": {
+          "doc": "The layer is not shown."
+        }
+      },
+      "default": "visible",
+      "doc": "Whether this layer is displayed.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "`global state` expression": {
+          "js": "5.16.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/3302",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/3302"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "global-state"
+        ]
+      },
+      "property-type": "data-constant"
+    }
+  },
+  "paint_line": {
+    "line-opacity": {
+      "type": "number",
+      "doc": "The opacity at which the line will be drawn.",
+      "default": 1,
+      "minimum": 0,
+      "maximum": 1,
+      "transition": true,
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.29.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "line-layer-opacity": {
+      "type": "number",
+      "default": 1,
+      "minimum": 0,
+      "maximum": 1,
+      "doc": "Opacity applied to the layer as a whole. Unlike `line-opacity` and alpha values in `line-color`, which are applied per feature and accumulate where lines overlap, `line-layer-opacity` is applied once so overlapping lines appear as a single surface at the given opacity. When both `line-opacity` and `line-layer-opacity` are set, the per-feature, overlap accumulation is preserved, then layer-opacity composites the result. This property affects only the layer it is set on and cannot be used to composite multiple layers together or control how this layer blends with layers above or below it.\n\n![line-opacity vs. line-layer-opacity](assets/line-layer-opacity.svg)",
+      "transition": true,
+      "sdk-support": {
+        "basic functionality": {
+          "js": "6.0.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/4298",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/4298"
+        },
+        "`global state` expression": {
+          "js": "6.0.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/3302",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/3302"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "global-state"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "line-color": {
+      "type": "color",
+      "doc": "The color with which the line will be drawn.",
+      "default": "#000000",
+      "transition": true,
+      "requires": [
+        {
+          "!": "line-pattern"
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.23.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "line-translate": {
+      "type": "array",
+      "value": "number",
+      "length": 2,
+      "default": [
+        0,
+        0
+      ],
+      "transition": true,
+      "units": "pixels",
+      "doc": "The geometry's offset. Values are `[x, y]` where negatives indicate left and up, respectively.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "line-translate-anchor": {
+      "type": "enum",
+      "values": {
+        "map": {
+          "doc": "The line is translated relative to the map."
+        },
+        "viewport": {
+          "doc": "The line is translated relative to the viewport."
+        }
+      },
+      "doc": "Controls the frame of reference for `line-translate`.",
+      "default": "map",
+      "requires": [
+        "line-translate"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "line-width": {
+      "type": "number",
+      "default": 1,
+      "minimum": 0,
+      "transition": true,
+      "units": "pixels",
+      "doc": "Stroke thickness.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.39.0",
+          "android": "5.2.0",
+          "ios": "3.7.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "line-gap-width": {
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "doc": "Draws a line casing outside of a line's actual path. Value indicates the width of the inner gap.",
+      "transition": true,
+      "units": "pixels",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.29.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "line-offset": {
+      "type": "number",
+      "default": 0,
+      "doc": "The line's offset. For linear features, a positive value offsets the line to the right, relative to the direction of the line, and a negative value to the left. For polygon features, a positive value results in an inset, and a negative value results in an outset.",
+      "transition": true,
+      "units": "pixels",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.12.1",
+          "android": "3.0.0",
+          "ios": "3.1.0"
+        },
+        "data-driven styling": {
+          "js": "0.29.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "line-blur": {
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "transition": true,
+      "units": "pixels",
+      "doc": "Blur applied to the line, in pixels.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.29.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "line-dasharray": {
+      "type": "array",
+      "value": "number",
+      "doc": "Specifies the lengths of the alternating dashes and gaps that form the dash pattern. The lengths are later scaled by the line width. To convert a dash length to pixels, multiply the length by the current line width. GeoJSON sources with `lineMetrics: true` specified won't render dashed lines to the expected scale. Zoom-dependent expressions will be evaluated only at integer zoom levels. The only way to create an array value is using `[\"literal\", [...]]`; arrays cannot be read from or derived from feature properties.",
+      "minimum": 0,
+      "transition": true,
+      "units": "line widths",
+      "requires": [
+        {
+          "!": "line-pattern"
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "5.8.0",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/744",
+          "android": "https://github.com/maplibre/maplibre-native/issues/744"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "cross-faded-data-driven"
+    },
+    "line-pattern": {
+      "type": "resolvedImage",
+      "transition": true,
+      "doc": "Name of image in sprite to use for drawing image lines. For seamless patterns, image width must be a factor of two (2, 4, 8, ..., 512). Note that zoom-dependent expressions will be evaluated only at integer zoom levels.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.49.0",
+          "android": "6.5.0",
+          "ios": "4.4.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "cross-faded-data-driven"
+    },
+    "line-gradient": {
+      "type": "color",
+      "doc": "Defines a gradient with which to color a line feature. Can only be used with GeoJSON sources that specify `\"lineMetrics\": true`.",
+      "transition": false,
+      "requires": [
+        {
+          "!": "line-dasharray"
+        },
+        {
+          "!": "line-pattern"
+        },
+        {
+          "source": "geojson",
+          "has": {
+            "lineMetrics": true
+          }
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.45.0",
+          "android": "6.5.0",
+          "ios": "4.4.0"
+        },
+        "data-driven styling": {}
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "line-progress"
+        ]
+      },
+      "property-type": "color-ramp"
+    }
+  }
+}

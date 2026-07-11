@@ -1,0 +1,160 @@
+{
+  "layer": {
+    "id": {
+      "type": "string",
+      "doc": "Unique layer name.",
+      "required": true
+    },
+    "type": {
+      "type": "enum",
+      "values": {
+        "fill": {
+          "doc": "A filled polygon with an optional stroked border.",
+          "sdk-support": {
+            "basic functionality": {
+              "js": "0.10.0",
+              "android": "2.0.1",
+              "ios": "2.0.0"
+            }
+          }
+        },
+        "line": {
+          "doc": "A stroked line.",
+          "sdk-support": {
+            "basic functionality": {
+              "js": "0.10.0",
+              "android": "2.0.1",
+              "ios": "2.0.0"
+            }
+          }
+        },
+        "symbol": {
+          "doc": "An icon or a text label.",
+          "sdk-support": {
+            "basic functionality": {
+              "js": "0.10.0",
+              "android": "2.0.1",
+              "ios": "2.0.0"
+            }
+          }
+        },
+        "circle": {
+          "doc": "A filled circle.",
+          "sdk-support": {
+            "basic functionality": {
+              "js": "0.10.0",
+              "android": "2.0.1",
+              "ios": "2.0.0"
+            }
+          }
+        },
+        "heatmap": {
+          "doc": "A heatmap.",
+          "sdk-support": {
+            "basic functionality": {
+              "js": "0.41.0",
+              "android": "6.0.0",
+              "ios": "4.0.0"
+            }
+          }
+        },
+        "fill-extrusion": {
+          "doc": "An extruded (3D) polygon.",
+          "sdk-support": {
+            "basic functionality": {
+              "js": "0.27.0",
+              "android": "5.1.0",
+              "ios": "3.6.0"
+            }
+          }
+        },
+        "raster": {
+          "doc": "Raster map textures such as satellite imagery.",
+          "sdk-support": {
+            "basic functionality": {
+              "js": "0.10.0",
+              "android": "2.0.1",
+              "ios": "2.0.0"
+            }
+          }
+        },
+        "hillshade": {
+          "doc": "Client-side hillshading visualization based on DEM data. The implementation supports Mapbox Terrain RGB, Mapzen Terrarium tiles and custom encodings.",
+          "sdk-support": {
+            "basic functionality": {
+              "js": "0.43.0",
+              "android": "6.0.0",
+              "ios": "4.0.0"
+            },
+            "additional methods": {
+              "js": "5.5.0",
+              "android": "13.0.0",
+              "ios": "6.24.0"
+            }
+          }
+        },
+        "color-relief": {
+          "doc": "Client-side elevation coloring based on DEM data. The implementation supports Mapbox Terrain RGB, Mapzen Terrarium tiles and custom encodings.",
+          "sdk-support": {
+            "basic functionality": {
+              "js": "5.6.0",
+              "android": "13.0.0",
+              "ios": "6.24.0"
+            }
+          }
+        },
+        "background": {
+          "doc": "The background color or pattern of the map.",
+          "sdk-support": {
+            "basic functionality": {
+              "js": "0.10.0",
+              "android": "2.0.1",
+              "ios": "2.0.0"
+            }
+          }
+        }
+      },
+      "doc": "Rendering type of this layer.",
+      "required": true
+    },
+    "metadata": {
+      "type": "*",
+      "doc": "Arbitrary properties useful to track with the layer, but do not influence rendering. Properties should be prefixed to avoid collisions, like 'maplibre:'.",
+      "example": {
+        "source:comment": "Hydrology FCCODE 460 - Narrow wash"
+      }
+    },
+    "source": {
+      "type": "string",
+      "doc": "Name of a source description to be used for this layer. Required for all layer types except `background`."
+    },
+    "source-layer": {
+      "type": "string",
+      "doc": "Layer to use from a vector tile source. Required for vector tile sources; prohibited for all other source types, including GeoJSON sources."
+    },
+    "minzoom": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 24,
+      "doc": "The minimum zoom level for the layer. At zoom levels less than the minzoom, the layer will be hidden."
+    },
+    "maxzoom": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 24,
+      "doc": "The maximum zoom level for the layer. At zoom levels equal to or greater than the maxzoom, the layer will be hidden."
+    },
+    "filter": {
+      "type": "filter",
+      "doc": "A expression specifying conditions on source features. Only features that match the filter are displayed. Zoom expressions in filters are only evaluated at integer zoom levels. The `feature-state` expression is not supported in filter expressions."
+    },
+    "layout": {
+      "type": "layout",
+      "doc": "Layout properties for the layer."
+    },
+    "paint": {
+      "type": "paint",
+      "doc": "Default paint properties for this layer."
+    }
+  }
+}

@@ -1,0 +1,3672 @@
+{
+  "expression_name": {
+    "doc": "First element in an expression array. May be followed by a number of arguments.",
+    "type": "enum",
+    "values": {
+      "let": {
+        "doc": "Binds expressions to named variables, which can then be referenced in the result expression using `[\"var\", \"variable_name\"]`.\n\n - [Visualize population density](https://maplibre.org/maplibre-gl-js/docs/examples/visualize-population-density/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "var_name_1",
+                "var_value_1",
+                "...",
+                "var_name_n",
+                "var_value_n",
+                "expression"
+              ],
+              "output-type": "any"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "var_name_i",
+              "type": "string literal",
+              "doc": "The name of the i-th variable."
+            },
+            {
+              "name": "var_value_i",
+              "type": "any",
+              "doc": "The value of the i-th variable."
+            },
+            {
+              "name": "expression",
+              "type": "any",
+              "doc": "The expression within which the named variables can be referenced."
+            }
+          ]
+        },
+        "example": [
+          "let",
+          "someNumber",
+          500,
+          [
+            "interpolate",
+            [
+              "linear"
+            ],
+            [
+              "var",
+              "someNumber"
+            ],
+            274,
+            "#edf8e9",
+            1551,
+            "#006d2c"
+          ]
+        ],
+        "group": "Variable binding",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "var": {
+        "doc": "References variable bound using `let`.\n\n - [Visualize population density](https://maplibre.org/maplibre-gl-js/docs/examples/visualize-population-density/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "var_name"
+              ],
+              "output-type": "any"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "var_name",
+              "type": "string literal",
+              "doc": "The name of the variable bound using `let`."
+            }
+          ]
+        },
+        "example": [
+          "var",
+          "density"
+        ],
+        "group": "Variable binding",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "literal": {
+        "doc": "Provides a literal array or object value.\n\n - [Display and style rich text labels](https://maplibre.org/maplibre-gl-js/docs/examples/display-and-style-rich-text-labels/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "json_object"
+              ],
+              "output-type": "object"
+            },
+            {
+              "parameters": [
+                "json_array"
+              ],
+              "output-type": "array"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "json_object",
+              "type": "JSON object"
+            },
+            {
+              "name": "json_array",
+              "type": "JSON array"
+            }
+          ]
+        },
+        "example": [
+          "literal",
+          [
+            "DIN Offc Pro Italic",
+            "Arial Unicode MS Regular"
+          ]
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "array": {
+        "doc": "Asserts that the input is an array (optionally with a specific item type and length). If, when the input expression is evaluated, it is not of the asserted type or length, then this assertion will cause the whole expression to be aborted.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "value"
+              ],
+              "output-type": "array"
+            },
+            {
+              "parameters": [
+                "type",
+                "value"
+              ],
+              "output-type": "array<type>"
+            },
+            {
+              "parameters": [
+                "type",
+                "length",
+                "value"
+              ],
+              "output-type": "array<type, length>"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "value",
+              "type": "any"
+            },
+            {
+              "name": "type",
+              "type": [
+                "string",
+                "number",
+                "boolean"
+              ],
+              "doc": "The asserted type of the input array."
+            },
+            {
+              "name": "length",
+              "type": "number literal",
+              "doc": "The asserted length of the input array."
+            }
+          ]
+        },
+        "example": [
+          "array",
+          "string",
+          3,
+          [
+            "literal",
+            [
+              "a",
+              "b",
+              "c"
+            ]
+          ]
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "at": {
+        "doc": "Retrieves an item from an array.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "index",
+                "array"
+              ],
+              "output-type": "T"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "index",
+              "type": "number",
+              "doc": "The index into `array`."
+            },
+            {
+              "name": "array",
+              "type": "array<T>",
+              "doc": "The array of items to retrieve the specified item from."
+            }
+          ]
+        },
+        "example": [
+          "at",
+          1,
+          [
+            "literal",
+            [
+              "a",
+              "b",
+              "c"
+            ]
+          ]
+        ],
+        "group": "Lookup",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "in": {
+        "doc": "Determines whether an item exists in an array or a substring exists in a string.\n\n - [Measure distances](https://maplibre.org/maplibre-gl-js/docs/examples/measure-distances/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "item",
+                "array"
+              ],
+              "output-type": "boolean"
+            },
+            {
+              "parameters": [
+                "substring",
+                "string"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "item",
+              "type": "T",
+              "doc": "The needle to search for within `array`."
+            },
+            {
+              "name": "array",
+              "type": "array<T>",
+              "doc": "The haystack through which to search for `item`."
+            },
+            {
+              "name": "substring",
+              "type": "string",
+              "doc": "The needle to search for within `string`."
+            },
+            {
+              "name": "string",
+              "type": "string",
+              "doc": "The haystack through which to search for `substring`."
+            }
+          ]
+        },
+        "example": [
+          "in",
+          "$type",
+          "Point"
+        ],
+        "group": "Lookup",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "1.6.0",
+            "android": "9.1.0",
+            "ios": "5.8.0"
+          }
+        }
+      },
+      "index-of": {
+        "doc": "Returns the first position at which an item can be found in an array or a substring can be found in a string, or `-1` if the input cannot be found. Accepts an optional index from where to begin the search. In a string, a UTF-16 surrogate pair counts as a single position.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "item",
+                "array",
+                "from_index?"
+              ],
+              "output-type": "number"
+            },
+            {
+              "parameters": [
+                "substring",
+                "string",
+                "from_index?"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "item",
+              "type": "T",
+              "doc": "The needle to search for within `array`."
+            },
+            {
+              "name": "array",
+              "type": "array<T>",
+              "doc": "The haystack through which to search for `item`."
+            },
+            {
+              "name": "substring",
+              "type": "string",
+              "doc": "The needle to search for within `string`."
+            },
+            {
+              "name": "string",
+              "type": "string",
+              "doc": "The haystack through which to search for `substring`."
+            },
+            {
+              "name": "from_index",
+              "type": "number",
+              "doc": "The index from where to begin the search."
+            }
+          ]
+        },
+        "example": [
+          "index-of",
+          "foo",
+          [
+            "baz",
+            "bar",
+            "hello",
+            "foo",
+            "world"
+          ]
+        ],
+        "group": "Lookup",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "1.10.0",
+            "android": "10.3.0",
+            "ios": "6.0.0"
+          }
+        }
+      },
+      "slice": {
+        "doc": "Returns a subarray from an array or a substring from a string from a specified start index, or between a start index and an end index if set. The return value is inclusive of the start index but not of the end index. In a string, a UTF-16 surrogate pair counts as a single position.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "array",
+                "start_index",
+                "end_index?"
+              ],
+              "output-type": "array<T>"
+            },
+            {
+              "parameters": [
+                "string",
+                "start_index",
+                "end_index?"
+              ],
+              "output-type": "string"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "array",
+              "type": "array<T>",
+              "doc": "The original array from which to extract the subarray."
+            },
+            {
+              "name": "string",
+              "type": "string",
+              "doc": "The original string from which to extract the substring."
+            },
+            {
+              "name": "start_index",
+              "type": "number",
+              "doc": "The inclusive index from which `slice` extracts items or characters from the subarray or substring."
+            },
+            {
+              "name": "end_index",
+              "type": "number",
+              "doc": "The non-inclusive index up to which `slice` extracts items or characters from the subarray or substring."
+            }
+          ]
+        },
+        "example": [
+          "slice",
+          [
+            "get",
+            "name"
+          ],
+          0,
+          3
+        ],
+        "group": "Lookup",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "1.10.0",
+            "android": "10.3.0",
+            "ios": "6.0.0"
+          }
+        }
+      },
+      "case": {
+        "doc": "Selects the first output whose corresponding test condition evaluates to true, or the fallback value otherwise.\n\n - [Create a hover effect](https://maplibre.org/maplibre-gl-js/docs/examples/create-a-hover-effect/)\n\n - [Display HTML clusters with custom properties](https://maplibre.org/maplibre-gl-js/docs/examples/display-html-clusters-with-custom-properties/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "condition_1",
+                "output_1",
+                "...",
+                "condition_n",
+                "output_n",
+                "fallback"
+              ],
+              "output-type": "any"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "condition_i",
+              "type": "boolean"
+            },
+            {
+              "name": "output_i",
+              "type": "any"
+            },
+            {
+              "name": "fallback",
+              "type": "any",
+              "doc": "The result when no condition evaluates to true."
+            }
+          ]
+        },
+        "example": [
+          "case",
+          [
+            "boolean",
+            [
+              "feature-state",
+              "hover"
+            ],
+            false
+          ],
+          1,
+          0.5
+        ],
+        "group": "Decision",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "match": {
+        "doc": "Selects the output whose label value matches the input value, or the fallback value if no match is found. The input can be any expression (e.g. `[\"get\", \"building_type\"]`). Each label must be either:\n\n - a single literal value; or\n\n - an array of literal values, whose values must be all strings or all numbers (e.g. `[100, 101]` or `[\"c\", \"b\"]`). The input matches if any of the values in the array matches, similar to the `\"in\"` operator.\n\nEach label must be unique. If the input type does not match the type of the labels, the result will be the fallback value.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input",
+                "label_1",
+                "output_1",
+                "...",
+                "label_n",
+                "output_n",
+                "fallback"
+              ],
+              "output-type": "any"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": [
+                "string",
+                "number"
+              ],
+              "doc": "Any expression."
+            },
+            {
+              "name": "label_i",
+              "type": [
+                "string literal",
+                "number literal",
+                "array<string literal>",
+                "array<number literal>"
+              ],
+              "doc": "The i-th literal value or array of literal values to match the input against."
+            },
+            {
+              "name": "output_i",
+              "type": "any",
+              "doc": "The result when the i-th label is the first label to match the input."
+            },
+            {
+              "name": "fallback",
+              "type": "any",
+              "doc": "The result when no label matches the input."
+            }
+          ]
+        },
+        "example": [
+          "match",
+          [
+            "get",
+            "building_type"
+          ],
+          "residential",
+          "#f00",
+          "commercial",
+          "#0f0",
+          "#000"
+        ],
+        "group": "Decision",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "coalesce": {
+        "doc": "Evaluates each expression in turn until the first non-null value is obtained, and returns that value.\n\n - [Use a fallback image](https://maplibre.org/maplibre-gl-js/docs/examples/use-a-fallback-image/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "expression_1",
+                "...",
+                "expression_n"
+              ],
+              "output-type": "any"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "expression_i",
+              "type": "any"
+            }
+          ]
+        },
+        "example": [
+          "coalesce",
+          [
+            "image",
+            [
+              "concat",
+              [
+                "get",
+                "icon"
+              ],
+              "_15"
+            ]
+          ],
+          [
+            "image",
+            "marker_15"
+          ]
+        ],
+        "group": "Decision",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "step": {
+        "doc": "Produces discrete, stepped results by evaluating a piecewise-constant function defined by pairs of input and output values (\"stops\"). The `input` may be any numeric expression (e.g., `[\"get\", \"population\"]`). Stop inputs must be numeric literals in strictly ascending order.\n\nReturns the output value of the stop just less than the input, or the first output if the input is less than the first stop.\n\n - [Create and style clusters](https://maplibre.org/maplibre-gl-js/docs/examples/create-and-style-clusters/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input",
+                "output_0",
+                "stop_input_1",
+                "stop_output_1",
+                "...",
+                "stop_input_n",
+                "stop_output_n"
+              ],
+              "output-type": "any"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number",
+              "doc": "Any numeric expression."
+            },
+            {
+              "name": "output_0",
+              "type": "any",
+              "doc": "The result when the `input` is less than the first stop."
+            },
+            {
+              "name": "stop_input_i",
+              "type": "number literal",
+              "doc": "The value of the i-th stop against which the `input` is compared."
+            },
+            {
+              "name": "stop_output_i",
+              "type": "any",
+              "doc": "The result when the i-th stop is the last stop less than the `input`."
+            }
+          ]
+        },
+        "example": [
+          "step",
+          [
+            "get",
+            "point_count"
+          ],
+          20,
+          100,
+          30,
+          750,
+          40
+        ],
+        "group": "Ramps, scales, curves",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.42.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "interpolate": {
+        "doc": "Produces continuous, smooth results by interpolating between pairs of input and output values (\"stops\"). The `input` may be any numeric expression (e.g., `[\"get\", \"population\"]`). Stop inputs must be numeric literals in strictly ascending order. The output type must be `number`, `array<number>`, `color`, `array<color>`, or `projection`.\n\n - [Animate map camera around a point](https://maplibre.org/maplibre-gl-js/docs/examples/animate-camera-around-point/)\n\n - [Change building color based on zoom level](https://maplibre.org/maplibre-gl-js/docs/examples/change-building-color-based-on-zoom-level/)\n\n - [Create a heatmap layer](https://maplibre.org/maplibre-gl-js/docs/examples/heatmap-layer/)\n\n - [Visualize population density](https://maplibre.org/maplibre-gl-js/docs/examples/visualize-population-density/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "interpolation_type",
+                "input",
+                "stop_input_1",
+                "stop_output_1",
+                "...",
+                "stop_input_n",
+                "stop_output_n"
+              ],
+              "output-type": [
+                "number",
+                "array<number>",
+                "color",
+                "array<color>",
+                "projection"
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "name": "interpolation_type",
+              "type": "interpolation",
+              "doc": "The interpolation type."
+            },
+            {
+              "name": "input",
+              "type": "number",
+              "doc": "Any numeric expression."
+            },
+            {
+              "name": "stop_input_i",
+              "type": "number literal",
+              "doc": "The value of the i-th stop against which the `input` is compared."
+            },
+            {
+              "name": "stop_output_i",
+              "type": [
+                "number",
+                "array<number>",
+                "color",
+                "array<color>",
+                "projection"
+              ],
+              "doc": "The output value corresponding to the i-th stop."
+            }
+          ]
+        },
+        "example": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          15,
+          0,
+          15.05,
+          [
+            "get",
+            "height"
+          ]
+        ],
+        "group": "Ramps, scales, curves",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.42.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "interpolate-hcl": {
+        "doc": "Produces continuous, smooth results by interpolating between pairs of input and output values (\"stops\"). Works like `interpolate`, but the output type must be `color` or `array<color>`, and the interpolation is performed in the Hue-Chroma-Luminance color space.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "interpolation_type",
+                "input",
+                "stop_input_1",
+                "stop_output_1",
+                "...",
+                "stop_input_n",
+                "stop_output_n"
+              ],
+              "output-type": [
+                "color",
+                "array<color>"
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "name": "interpolation_type",
+              "type": "interpolation",
+              "doc": "The interpolation type."
+            },
+            {
+              "name": "input",
+              "type": "number"
+            },
+            {
+              "name": "stop_input_i",
+              "type": "number literal"
+            },
+            {
+              "name": "stop_output_i",
+              "type": [
+                "color",
+                "array<color>"
+              ]
+            }
+          ]
+        },
+        "example": [
+          "interpolate-hcl",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          15,
+          "#f00",
+          15.05,
+          "#00f"
+        ],
+        "group": "Ramps, scales, curves",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.49.0",
+            "ios": "https://github.com/maplibre/maplibre-native/issues/2784",
+            "android": "https://github.com/maplibre/maplibre-native/issues/2784"
+          }
+        }
+      },
+      "interpolate-lab": {
+        "doc": "Produces continuous, smooth results by interpolating between pairs of input and output values (\"stops\"). Works like `interpolate`, but the output type must be `color` or `array<color>`, and the interpolation is performed in the CIELAB color space.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "interpolation_type",
+                "input",
+                "stop_input_1",
+                "stop_output_1",
+                "...",
+                "stop_input_n",
+                "stop_output_n"
+              ],
+              "output-type": [
+                "color",
+                "array<color>"
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "name": "interpolation_type",
+              "type": "interpolation",
+              "doc": "The interpolation type."
+            },
+            {
+              "name": "input",
+              "type": "number"
+            },
+            {
+              "name": "stop_input_i",
+              "type": "number literal"
+            },
+            {
+              "name": "stop_output_i",
+              "type": [
+                "color",
+                "array<color>"
+              ]
+            }
+          ]
+        },
+        "example": [
+          "interpolate-lab",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          15,
+          "#f00",
+          15.05,
+          "#00f"
+        ],
+        "group": "Ramps, scales, curves",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.49.0",
+            "ios": "https://github.com/maplibre/maplibre-native/issues/2784",
+            "android": "https://github.com/maplibre/maplibre-native/issues/2784"
+          }
+        }
+      },
+      "ln2": {
+        "doc": "Returns the mathematical constant ln(2).",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [],
+              "output-type": "number"
+            }
+          ]
+        },
+        "example": [
+          "ln2"
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "pi": {
+        "doc": "Returns the mathematical constant pi.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [],
+              "output-type": "number"
+            }
+          ]
+        },
+        "example": [
+          "pi"
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "e": {
+        "doc": "Returns the mathematical constant e.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [],
+              "output-type": "number"
+            }
+          ]
+        },
+        "example": [
+          "e"
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "typeof": {
+        "doc": "Returns a string describing the type of the given value.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "value"
+              ],
+              "output-type": "string"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ]
+        },
+        "example": [
+          "typeof",
+          [
+            "get",
+            "name"
+          ]
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "string": {
+        "doc": "Asserts that the input value is a string. If multiple values are provided, each one is evaluated in order until a string is obtained. If none of the inputs are strings, the expression is an error.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "value_1",
+                "...",
+                "value_n"
+              ],
+              "output-type": "string"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "value_i",
+              "type": "any"
+            }
+          ]
+        },
+        "example": [
+          "string",
+          [
+            "get",
+            "name"
+          ]
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "number": {
+        "doc": "Asserts that the input value is a number. If multiple values are provided, each one is evaluated in order until a number is obtained. If none of the inputs are numbers, the expression is an error.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "value_1",
+                "...",
+                "value_n"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "value_i",
+              "type": "any"
+            }
+          ]
+        },
+        "example": [
+          "number",
+          [
+            "get",
+            "population"
+          ]
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "boolean": {
+        "doc": "Asserts that the input value is a boolean. If multiple values are provided, each one is evaluated in order until a boolean is obtained. If none of the inputs are booleans, the expression is an error.\n\n - [Create a hover effect](https://maplibre.org/maplibre-gl-js/docs/examples/create-a-hover-effect/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "value_1",
+                "...",
+                "value_n"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "value_i",
+              "type": "any"
+            }
+          ]
+        },
+        "example": [
+          "boolean",
+          [
+            "feature-state",
+            "hover"
+          ],
+          false
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "object": {
+        "doc": "Asserts that the input value is an object. If multiple values are provided, each one is evaluated in order until an object is obtained. If none of the inputs are objects, the expression is an error.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "value_1",
+                "...",
+                "value_n"
+              ],
+              "output-type": "object"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "value_i",
+              "type": "any"
+            }
+          ]
+        },
+        "example": [
+          "object",
+          [
+            "get",
+            "some-property"
+          ]
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "collator": {
+        "doc": "Returns a `collator` for use in locale-dependent comparison operations. Use `resolved-locale` to test the results of locale fallback behavior.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "options"
+              ],
+              "output-type": "collator"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "options",
+              "type": {
+                "case-sensitive": {
+                  "type": "boolean",
+                  "default": false,
+                  "example": true,
+                  "doc": "If characters of different case-ness are considered different"
+                },
+                "diacritic-sensitive": {
+                  "type": "boolean",
+                  "default": false,
+                  "example": true,
+                  "doc": "If characters with different diacritics are considered different"
+                },
+                "locale": {
+                  "type": "string",
+                  "example": "en",
+                  "doc": "IETF language tag of the locale to use. If none is provided, the default locale is used. If the requested locale is not available, the `collator` will use a system-defined fallback locale."
+                }
+              }
+            }
+          ]
+        },
+        "example": [
+          "collator",
+          {
+            "case-sensitive": true,
+            "diacritic-sensitive": true,
+            "locale": "fr"
+          }
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.45.0",
+            "android": "6.5.0",
+            "ios": "4.2.0"
+          }
+        }
+      },
+      "format": {
+        "doc": "Returns a `formatted` string for displaying mixed-format text in the `text-field` property. The input may contain a string literal or expression, including an [`'image'`](#image) expression. Strings may be followed by a style override object.\n\n - [Change the case of labels](https://maplibre.org/maplibre-gl-js/docs/examples/change-case-of-labels/)\n\n - [Display and style rich text labels](https://maplibre.org/maplibre-gl-js/docs/examples/display-and-style-rich-text-labels/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "style_overrides_1?",
+                "...",
+                "input_n",
+                "style_overrides_n?"
+              ],
+              "output-type": "formatted"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_i",
+              "type": [
+                "string",
+                "image"
+              ]
+            },
+            {
+              "name": "style_overrides_i",
+              "type": {
+                "text-font": {
+                  "type": "string",
+                  "doc": "Overrides the font stack specified by the root layout property.",
+                  "example": "Arial Unicode MS Regular"
+                },
+                "text-color": {
+                  "type": "color",
+                  "doc": "Overrides the color specified by the root paint property.",
+                  "example": "#333"
+                },
+                "font-scale": {
+                  "type": "number",
+                  "doc": "Applies a scaling factor on `text-size` as specified by the root layout property.",
+                  "example": 1.2
+                },
+                "vertical-align": {
+                  "type": "enum",
+                  "doc": "Aligns a vertical text section or image in relation to the row it belongs to. Refer to [the design proposal](https://github.com/maplibre/maplibre-style-spec/issues/832) for more details.",
+                  "default": "bottom",
+                  "example": "bottom",
+                  "values": {
+                    "bottom": {
+                      "doc": "align the bottom of this section with the bottom of other sections.\n![Visual representation of bottom alignment](https://github.com/user-attachments/assets/0474a2fd-a4b2-417c-9187-7a13a28695bc)"
+                    },
+                    "center": {
+                      "doc": "align the center of this section with the center of other sections.\n![Visual representation of center alignment](https://github.com/user-attachments/assets/92237455-be6d-4c5d-b8f6-8127effc1950)"
+                    },
+                    "top": {
+                      "doc": "align the top of this section with the top of other sections.\n![Visual representation of top alignment](https://github.com/user-attachments/assets/45dccb28-d977-4abb-a006-4ea9792b7c53)"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "example": [
+          "format",
+          [
+            "upcase",
+            [
+              "get",
+              "FacilityName"
+            ]
+          ],
+          {
+            "font-scale": 0.8
+          },
+          "\n\n",
+          {},
+          [
+            "downcase",
+            [
+              "get",
+              "Comments"
+            ]
+          ],
+          {
+            "font-scale": 0.6,
+            "vertical-align": "center"
+          }
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.48.0",
+            "android": "6.7.0",
+            "ios": "4.6.0"
+          },
+          "text-font": {
+            "js": "0.48.0",
+            "android": "6.7.0",
+            "ios": "4.6.0"
+          },
+          "font-scale": {
+            "js": "0.48.0",
+            "android": "6.7.0",
+            "ios": "4.6.0"
+          },
+          "text-color": {
+            "js": "1.3.0",
+            "android": "7.3.0",
+            "ios": "4.10.0"
+          },
+          "vertical-align": {
+            "js": "5.1.0",
+            "android": "https://github.com/maplibre/maplibre-native/issues/3055",
+            "ios": "https://github.com/maplibre/maplibre-native/issues/3055"
+          },
+          "image": {
+            "js": "1.6.0",
+            "android": "8.6.0",
+            "ios": "5.7.0"
+          }
+        }
+      },
+      "image": {
+        "doc": "Returns an `image` type for use in `icon-image`, `*-pattern` entries and as a section in the `format` expression. If set, the `image` argument will check that the requested image exists in the style and will return either the resolved image name or `null`, depending on whether or not the image is currently in the style. This validation process is synchronous and requires the image to have been added to the style before requesting it in the `image` argument.\n\n - [Use a fallback image](https://maplibre.org/maplibre-gl-js/docs/examples/use-a-fallback-image/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "image_name"
+              ],
+              "output-type": "image"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "image_name",
+              "type": "string"
+            }
+          ]
+        },
+        "example": [
+          "image",
+          "marker_15"
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "1.4.0",
+            "android": "8.6.0",
+            "ios": "5.7.0"
+          }
+        }
+      },
+      "global-state": {
+        "doc": "Retrieves a property value from global state that can be set with platform-specific APIs. Defaults can be provided using the [`state`](https://maplibre.org/maplibre-style-spec/root/#state) root property. Returns `null` if no value nor default value is set for the retrieved property.",
+        "group": "Lookup",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "property_name"
+              ],
+              "output-type": "any"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "property_name",
+              "type": "string literal",
+              "doc": "The name of the global state property to retrieve."
+            }
+          ]
+        },
+        "example": [
+          "global-state",
+          "someProperty"
+        ],
+        "sdk-support": {
+          "basic functionality": {
+            "js": "5.6.0",
+            "android": "https://github.com/maplibre/maplibre-native/issues/3302",
+            "ios": "https://github.com/maplibre/maplibre-native/issues/3302"
+          }
+        }
+      },
+      "number-format": {
+        "doc": "Converts the input number into a string representation using the provided format_options.\n\n - [Display HTML clusters with custom properties](https://maplibre.org/maplibre-gl-js/docs/examples/display-html-clusters-with-custom-properties/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input",
+                "format_options"
+              ],
+              "output-type": "string"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number",
+              "doc": "number to format"
+            },
+            {
+              "name": "format_options",
+              "type": {
+                "locale": {
+                  "type": "string",
+                  "example": "en",
+                  "doc": "Specifies the locale to use, as a BCP 47 language tag"
+                },
+                "currency": {
+                  "type": "string",
+                  "example": "USD",
+                  "doc": "An ISO 4217 code to use for currency-style formatting"
+                },
+                "unit": {
+                  "type": "string",
+                  "example": "meter",
+                  "doc": "A CLDR or ECMA-402 unit to use for quantity-style formatting"
+                },
+                "min-fraction-digits": {
+                  "type": "number",
+                  "example": 1,
+                  "doc": "Minimum number of fractional digits to include"
+                },
+                "max-fraction-digits": {
+                  "type": "number",
+                  "example": 2,
+                  "doc": "Maximum number of fractional digits to include"
+                }
+              },
+              "doc": "Format options for the number"
+            }
+          ]
+        },
+        "example": [
+          "number-format",
+          [
+            "get",
+            "mag"
+          ],
+          {
+            "min-fraction-digits": 1,
+            "max-fraction-digits": 1
+          }
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.54.0",
+            "android": "8.4.0",
+            "ios": "supported"
+          },
+          "`unit` property": {
+            "js": "5.20.0",
+            "android": "https://github.com/maplibre/maplibre-native/issues/4071",
+            "ios": "https://github.com/maplibre/maplibre-native/issues/4071"
+          }
+        }
+      },
+      "to-string": {
+        "doc": "Converts the input value to a string. If the input is `null`, the result is `\"\"`. If the input is a boolean, the result is `\"true\"` or `\"false\"`. If the input is a number, it is converted to a string as specified by the [\"NumberToString\" algorithm](https://tc39.github.io/ecma262/#sec-tostring-applied-to-the-number-type) of the ECMAScript Language Specification. If the input is a color, it is converted to a string of the form `\"rgba(r,g,b,a)\"`, where `r`, `g`, and `b` are numerals ranging from 0 to 255, and `a` ranges from 0 to 1. Otherwise, the input is converted to a string in the format specified by the [`JSON.stringify`](https://tc39.github.io/ecma262/#sec-json.stringify) function of the ECMAScript Language Specification.\n\n - [Create a time slider](https://maplibre.org/maplibre-gl-js/docs/examples/create-a-time-slider/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "value"
+              ],
+              "output-type": "string"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ]
+        },
+        "example": [
+          "to-string",
+          [
+            "get",
+            "mag"
+          ]
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "to-number": {
+        "doc": "Converts the input value to a number, if possible. If the input is `null` or `false`, the result is 0. If the input is `true`, the result is 1. If the input is a string, it is converted to a number as specified by the [\"ToNumber Applied to the String Type\" algorithm](https://tc39.github.io/ecma262/#sec-tonumber-applied-to-the-string-type) of the ECMAScript Language Specification. If multiple values are provided, each one is evaluated in order until the first successful conversion is obtained. If none of the inputs can be converted, the expression is an error.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "value_1",
+                "...",
+                "value_n"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "value_i",
+              "type": "any"
+            }
+          ]
+        },
+        "example": [
+          "to-number",
+          "someProperty"
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "to-boolean": {
+        "doc": "Converts the input value to a boolean. The result is `false` when the input is an empty string, 0, `false`, `null`, or `NaN`; otherwise it is `true`.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "value"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "value",
+              "type": "any"
+            }
+          ]
+        },
+        "example": [
+          "to-boolean",
+          "someProperty"
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "to-rgba": {
+        "doc": "Returns a four-element array containing the input color's red, green, blue, and alpha components, in that order.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "color"
+              ],
+              "output-type": "array"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "color",
+              "type": "color"
+            }
+          ]
+        },
+        "example": [
+          "to-rgba",
+          "#ff0000"
+        ],
+        "group": "Color",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "to-color": {
+        "doc": "Converts the input value to a color. If multiple values are provided, each one is evaluated in order until the first successful conversion is obtained. If none of the inputs can be converted, the expression is an error.\n\n - [Visualize population density](https://maplibre.org/maplibre-gl-js/docs/examples/visualize-population-density/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "value_1",
+                "...",
+                "value_n"
+              ],
+              "output-type": "color"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "value_i",
+              "type": "any"
+            }
+          ]
+        },
+        "example": [
+          "to-color",
+          "#edf8e9"
+        ],
+        "group": "Types",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "rgb": {
+        "doc": "Creates a color value from red, green, and blue components, which must range between 0 and 255, and an alpha component of 1. If any component is out of range, the expression is an error.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "red",
+                "green",
+                "blue"
+              ],
+              "output-type": "color"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "red",
+              "type": "number"
+            },
+            {
+              "name": "green",
+              "type": "number"
+            },
+            {
+              "name": "blue",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "rgb",
+          255,
+          0,
+          0
+        ],
+        "group": "Color",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "rgba": {
+        "doc": "Creates a color value from red, green, blue components, which must range between 0 and 255, and an alpha component which must range between zero and one. If any component is out of range, the expression is an error.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "red",
+                "green",
+                "blue",
+                "alpha"
+              ],
+              "output-type": "color"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "red",
+              "type": "number"
+            },
+            {
+              "name": "green",
+              "type": "number"
+            },
+            {
+              "name": "blue",
+              "type": "number"
+            },
+            {
+              "name": "alpha",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "rgba",
+          255,
+          0,
+          0,
+          1
+        ],
+        "group": "Color",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "get": {
+        "doc": "Retrieves a property value from the current feature's properties, or from another object if a second argument is provided. Returns null if the requested property is missing.\n\n - [Change the case of labels](https://maplibre.org/maplibre-gl-js/docs/examples/change-case-of-labels/)\n\n - [Display HTML clusters with custom properties](https://maplibre.org/maplibre-gl-js/docs/examples/display-html-clusters-with-custom-properties/)\n\n - [Extrude polygons for 3D indoor mapping](https://maplibre.org/maplibre-gl-js/docs/examples/extrude-polygons-for-3d-indoor-mapping/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "property_name",
+                "object?"
+              ],
+              "output-type": "any"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "property_name",
+              "type": "string",
+              "doc": "The name of the property to retrieve the value of."
+            },
+            {
+              "name": "object",
+              "type": "object",
+              "doc": "The object to retrieve the value from."
+            }
+          ]
+        },
+        "example": [
+          "get",
+          "someProperty"
+        ],
+        "group": "Lookup",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "has": {
+        "doc": "Tests for the presence of a property value in the current feature's properties, or from another object if a second argument is provided.\n\n - [Create and style clusters](https://maplibre.org/maplibre-gl-js/docs/examples/create-and-style-clusters/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "property_name",
+                "object?"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "property_name",
+              "type": "string",
+              "doc": "The name of the property to test for the presence of."
+            },
+            {
+              "name": "object",
+              "type": "object",
+              "doc": "The object in which to test for the presence of the `property_name` property."
+            }
+          ]
+        },
+        "example": [
+          "has",
+          "someProperty"
+        ],
+        "group": "Lookup",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "length": {
+        "doc": "Gets the length of an array or string. In a string, a UTF-16 surrogate pair counts as a single position.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "array_or_string"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "array_or_string",
+              "type": [
+                "array",
+                "string"
+              ]
+            }
+          ]
+        },
+        "example": [
+          "length",
+          [
+            "get",
+            "myArray"
+          ]
+        ],
+        "group": "Lookup",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "properties": {
+        "doc": "Gets the feature properties object.  Note that in some cases, it may be more efficient to use `[\"get\", \"property_name\"]` directly.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [],
+              "output-type": "object"
+            }
+          ]
+        },
+        "example": [
+          "properties"
+        ],
+        "group": "Feature data",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "feature-state": {
+        "doc": "Retrieves a property value from the current feature's state. Returns null if the requested property is not present on the feature's state. A feature's state is not part of the GeoJSON or vector tile data, and must be set programmatically on each feature. When `source.promoteId` is not provided, features are identified by their `id` attribute, which must be an integer or a string that can be cast to an integer. When `source.promoteId` is provided, features are identified by their `promoteId` property, which may be a number, string, or any primitive data type. Note that `[\"feature-state\"]` can only be used with paint properties that support data-driven styling.\n\n - [Create a hover effect](https://maplibre.org/maplibre-gl-js/docs/examples/create-a-hover-effect/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "property_name"
+              ],
+              "output-type": "any"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "property_name",
+              "type": "string"
+            }
+          ]
+        },
+        "example": [
+          "feature-state",
+          "hover"
+        ],
+        "group": "Feature data",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.46.0",
+            "ios": "https://github.com/maplibre/maplibre-native/issues/1698",
+            "android": "https://github.com/maplibre/maplibre-native/issues/1698"
+          }
+        }
+      },
+      "geometry-type": {
+        "doc": "Returns the feature's simple geometry type: `Point`, `LineString`, or `Polygon`. `MultiPoint`, `MultiLineString`, and `MultiPolygon` are returned as `Point`, `LineString`, and `Polygon`, respectively.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [],
+              "output-type": "string"
+            }
+          ]
+        },
+        "example": [
+          "==",
+          [
+            "geometry-type"
+          ],
+          "Polygon"
+        ],
+        "group": "Feature data",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "id": {
+        "doc": "Gets the feature's id, if it has one.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [],
+              "output-type": "any"
+            }
+          ]
+        },
+        "example": [
+          "id"
+        ],
+        "group": "Feature data",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "zoom": {
+        "doc": "Gets the current zoom level.  Note that in style layout and paint properties, `[\"zoom\"]` may only appear as the input to a top-level `\"step\"` or `\"interpolate\"` expression.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [],
+              "output-type": "number"
+            }
+          ]
+        },
+        "example": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          15,
+          0,
+          15.05,
+          [
+            "get",
+            "height"
+          ]
+        ],
+        "group": "Zoom",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "heatmap-density": {
+        "doc": "Gets the kernel density estimation of a pixel in a heatmap layer, which is a relative measure of how many data points are crowded around a particular pixel. Can only be used in the `heatmap-color` property.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [],
+              "output-type": "number"
+            }
+          ]
+        },
+        "example": [
+          "heatmap-density"
+        ],
+        "group": "Heatmap",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "elevation": {
+        "doc": "Gets the elevation of a pixel (in meters above the vertical datum reference of the `raster-dem` tiles) from a `raster-dem` source. Can only be used in the `color-relief-color` property of a `color-relief` layer.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [],
+              "output-type": "number"
+            }
+          ]
+        },
+        "example": [
+          "elevation"
+        ],
+        "group": "Color Relief",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "5.6.0",
+            "android": "13.0.0",
+            "ios": "6.24.0"
+          }
+        }
+      },
+      "line-progress": {
+        "doc": "Gets the progress along a gradient line. Can only be used in the `line-gradient` property.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [],
+              "output-type": "number"
+            }
+          ]
+        },
+        "example": [
+          "line-progress"
+        ],
+        "group": "Feature data",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.45.0",
+            "android": "6.5.0",
+            "ios": "4.6.0"
+          }
+        }
+      },
+      "accumulated": {
+        "doc": "Gets the value of a cluster property accumulated so far. Can only be used in the `clusterProperties` option of a clustered GeoJSON source.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [],
+              "output-type": "any"
+            }
+          ]
+        },
+        "example": [
+          "accumulated"
+        ],
+        "group": "Feature data",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.53.0",
+            "ios": "supported",
+            "android": "supported"
+          }
+        }
+      },
+      "+": {
+        "doc": "Returns the sum of the inputs.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "...",
+                "input_n"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_i",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "+",
+          2,
+          3
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "*": {
+        "doc": "Returns the product of the inputs.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "...",
+                "input_n"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_i",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "*",
+          2,
+          3
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "-": {
+        "doc": "For two inputs, returns the result of subtracting the second input from the first. For a single input, returns the result of subtracting it from 0.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "input_2"
+              ],
+              "output-type": "number"
+            },
+            {
+              "parameters": [
+                "single_input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_1",
+              "type": "number",
+              "doc": "The number from which to subtract `input_2`."
+            },
+            {
+              "name": "input_2",
+              "type": "number",
+              "doc": "The number to subtract from `input_1`."
+            },
+            {
+              "name": "single_input",
+              "type": "number",
+              "doc": "The number to subtract from 0."
+            }
+          ]
+        },
+        "example": [
+          "-",
+          10
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "/": {
+        "doc": "Returns the result of floating point division of the first input by the second.\n\n - [Visualize population density](https://maplibre.org/maplibre-gl-js/docs/examples/visualize-population-density/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "input_2"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_1",
+              "type": "number",
+              "doc": "The dividend."
+            },
+            {
+              "name": "input_2",
+              "type": "number",
+              "doc": "The divisor."
+            }
+          ]
+        },
+        "example": [
+          "/",
+          [
+            "get",
+            "population"
+          ],
+          [
+            "get",
+            "sq-km"
+          ]
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "%": {
+        "doc": "Returns the remainder after integer division of the first input by the second.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "input_2"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_1",
+              "type": "number",
+              "doc": "The dividend."
+            },
+            {
+              "name": "input_2",
+              "type": "number",
+              "doc": "The divisor."
+            }
+          ]
+        },
+        "example": [
+          "%",
+          10,
+          3
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "^": {
+        "doc": "Returns the result of raising the first input to the power specified by the second.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "input_2"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_1",
+              "type": "number",
+              "doc": "The base."
+            },
+            {
+              "name": "input_2",
+              "type": "number",
+              "doc": "The exponent."
+            }
+          ]
+        },
+        "example": [
+          "^",
+          2,
+          3
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "sqrt": {
+        "doc": "Returns the square root of the input.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number",
+              "doc": "The radicand."
+            }
+          ]
+        },
+        "example": [
+          "sqrt",
+          9
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.42.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "log10": {
+        "doc": "Returns the base-ten logarithm of the input.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "log10",
+          8
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "ln": {
+        "doc": "Returns the natural logarithm of the input.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "ln",
+          8
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "log2": {
+        "doc": "Returns the base-two logarithm of the input.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "log2",
+          8
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "sin": {
+        "doc": "Returns the sine of the input.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "sin",
+          1
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "cos": {
+        "doc": "Returns the cosine of the input.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "cos",
+          1
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "tan": {
+        "doc": "Returns the tangent of the input.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "tan",
+          1
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "asin": {
+        "doc": "Returns the arcsine of the input.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "asin",
+          1
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "acos": {
+        "doc": "Returns the arccosine of the input.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "acos",
+          1
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "atan": {
+        "doc": "Returns the arctangent of the input.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "atan",
+          1
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "min": {
+        "doc": "Returns the minimum value of the inputs.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "...",
+                "input_n"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_i",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "min",
+          1,
+          2
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "max": {
+        "doc": "Returns the maximum value of the inputs.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "...",
+                "input_n"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_i",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "max",
+          1,
+          2
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "round": {
+        "doc": "Rounds the input to the nearest integer. Halfway values are rounded away from zero. For example, `[\"round\", -1.5]` evaluates to -2.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "round",
+          1.5
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.45.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "abs": {
+        "doc": "Returns the absolute value of the input.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "abs",
+          -1.5
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.45.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "ceil": {
+        "doc": "Returns the smallest integer that is greater than or equal to the input.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "ceil",
+          1.5
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.45.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "floor": {
+        "doc": "Returns the largest integer that is less than or equal to the input.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "number"
+            }
+          ]
+        },
+        "example": [
+          "floor",
+          1.5
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.45.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "distance": {
+        "doc": "Returns the shortest distance in meters between the evaluated feature and the input geometry. The input value can be a valid GeoJSON of type `Point`, `MultiPoint`, `LineString`, `MultiLineString`, `Polygon`, `MultiPolygon`, `Feature`, or `FeatureCollection`. Distance values returned may vary in precision due to loss in precision from encoding geometries, particularly below zoom level 13.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "geojson"
+              ],
+              "output-type": "number"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "geojson",
+              "type": "GeoJSON object"
+            }
+          ]
+        },
+        "example": [
+          "distance",
+          {
+            "type": "Point",
+            "coordinates": [
+              0,
+              0
+            ]
+          }
+        ],
+        "group": "Math",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "4.2.0",
+            "android": "9.2.0",
+            "ios": "5.9.0"
+          }
+        }
+      },
+      "==": {
+        "doc": "Returns `true` if the input values are equal, `false` otherwise. The comparison is strictly typed: values of different runtime types are always considered unequal. Cases where the types are known to be different at parse time are considered invalid and will produce a parse error. Accepts an optional `collator` argument to control locale-dependent string comparisons.\n\n - [Add multiple geometries from one GeoJSON source](https://maplibre.org/maplibre-gl-js/docs/examples/multiple-geometries/)\n\n - [Create a time slider](https://maplibre.org/maplibre-gl-js/docs/examples/timeline-animation/)\n\n - [Display buildings in 3D](https://maplibre.org/maplibre-gl-js/docs/examples/display-buildings-in-3d/)\n\n - [Filter symbols by toggling a list](https://maplibre.org/maplibre-gl-js/docs/examples/filter-symbols-by-toggling-a-list/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "input_2",
+                "collator?"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_1",
+              "type": "any"
+            },
+            {
+              "name": "input_2",
+              "type": "any"
+            },
+            {
+              "name": "collator",
+              "type": "collator",
+              "doc": "Options for locale-dependent comparison."
+            }
+          ]
+        },
+        "example": [
+          "==",
+          "$type",
+          "Polygon"
+        ],
+        "group": "Decision",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          },
+          "collator": {
+            "js": "0.45.0",
+            "android": "6.5.0",
+            "ios": "4.2.0"
+          }
+        }
+      },
+      "!=": {
+        "doc": "Returns `true` if the input values are not equal, `false` otherwise. The comparison is strictly typed: values of different runtime types are always considered unequal. Cases where the types are known to be different at parse time are considered invalid and will produce a parse error. Accepts an optional `collator` argument to control locale-dependent string comparisons.\n\n - [Display HTML clusters with custom properties](https://maplibre.org/maplibre-gl-js/docs/examples/display-html-clusters-with-custom-properties/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "input_2",
+                "collator?"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_1",
+              "type": "any"
+            },
+            {
+              "name": "input_2",
+              "type": "any"
+            },
+            {
+              "name": "collator",
+              "type": "collator",
+              "doc": "Options for locale-dependent comparison."
+            }
+          ]
+        },
+        "example": [
+          "!=",
+          "cluster",
+          true
+        ],
+        "group": "Decision",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          },
+          "collator": {
+            "js": "0.45.0",
+            "android": "6.5.0",
+            "ios": "4.2.0"
+          }
+        }
+      },
+      ">": {
+        "doc": "Returns `true` if the first input is strictly greater than the second, `false` otherwise. The arguments are required to be either both strings or both numbers; if during evaluation they are not, expression evaluation produces an error. Cases where this constraint is known not to hold at parse time are considered in valid and will produce a parse error. Accepts an optional `collator` argument to control locale-dependent string comparisons.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "string_1",
+                "string_2",
+                "collator?"
+              ],
+              "output-type": "boolean"
+            },
+            {
+              "parameters": [
+                "number_1",
+                "number_2",
+                "collator?"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "string_i",
+              "type": "string"
+            },
+            {
+              "name": "number_i",
+              "type": "number"
+            },
+            {
+              "name": "collator",
+              "type": "collator",
+              "doc": "Options for locale-dependent comparison."
+            }
+          ]
+        },
+        "example": [
+          ">",
+          [
+            "get",
+            "mag"
+          ],
+          2
+        ],
+        "group": "Decision",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          },
+          "collator": {
+            "js": "0.45.0",
+            "android": "6.5.0",
+            "ios": "4.2.0"
+          }
+        }
+      },
+      "<": {
+        "doc": "Returns `true` if the first input is strictly less than the second, `false` otherwise. The arguments are required to be either both strings or both numbers; if during evaluation they are not, expression evaluation produces an error. Cases where this constraint is known not to hold at parse time are considered in valid and will produce a parse error. Accepts an optional `collator` argument to control locale-dependent string comparisons.\n\n - [Display HTML clusters with custom properties](https://maplibre.org/maplibre-gl-js/docs/examples/display-html-clusters-with-custom-properties/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "string_1",
+                "string_2",
+                "collator?"
+              ],
+              "output-type": "boolean"
+            },
+            {
+              "parameters": [
+                "number_1",
+                "number_2",
+                "collator?"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "string_i",
+              "type": "string"
+            },
+            {
+              "name": "number_i",
+              "type": "number"
+            },
+            {
+              "name": "collator",
+              "type": "collator",
+              "doc": "Options for locale-dependent comparison."
+            }
+          ]
+        },
+        "example": [
+          "<",
+          [
+            "get",
+            "mag"
+          ],
+          2
+        ],
+        "group": "Decision",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          },
+          "collator": {
+            "js": "0.45.0",
+            "android": "6.5.0",
+            "ios": "4.2.0"
+          }
+        }
+      },
+      ">=": {
+        "doc": "Returns `true` if the first input is greater than or equal to the second, `false` otherwise. The arguments are required to be either both strings or both numbers; if during evaluation they are not, expression evaluation produces an error. Cases where this constraint is known not to hold at parse time are considered in valid and will produce a parse error. Accepts an optional `collator` argument to control locale-dependent string comparisons.\n\n - [Display HTML clusters with custom properties](https://maplibre.org/maplibre-gl-js/docs/examples/display-html-clusters-with-custom-properties/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "string_1",
+                "string_2",
+                "collator?"
+              ],
+              "output-type": "boolean"
+            },
+            {
+              "parameters": [
+                "number_1",
+                "number_2",
+                "collator?"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "string_i",
+              "type": "string"
+            },
+            {
+              "name": "number_i",
+              "type": "number"
+            },
+            {
+              "name": "collator",
+              "type": "collator",
+              "doc": "Options for locale-dependent comparison."
+            }
+          ]
+        },
+        "example": [
+          ">=",
+          [
+            "get",
+            "mag"
+          ],
+          6
+        ],
+        "group": "Decision",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          },
+          "collator": {
+            "js": "0.45.0",
+            "android": "6.5.0",
+            "ios": "4.2.0"
+          }
+        }
+      },
+      "<=": {
+        "doc": "Returns `true` if the first input is less than or equal to the second, `false` otherwise. The arguments are required to be either both strings or both numbers; if during evaluation they are not, expression evaluation produces an error. Cases where this constraint is known not to hold at parse time are considered in valid and will produce a parse error. Accepts an optional `collator` argument to control locale-dependent string comparisons.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "string_1",
+                "string_2",
+                "collator?"
+              ],
+              "output-type": "boolean"
+            },
+            {
+              "parameters": [
+                "number_1",
+                "number_2",
+                "collator?"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "string_i",
+              "type": "string"
+            },
+            {
+              "name": "number_i",
+              "type": "number"
+            },
+            {
+              "name": "collator",
+              "type": "collator",
+              "doc": "Options for locale-dependent comparison."
+            }
+          ]
+        },
+        "example": [
+          "<=",
+          [
+            "get",
+            "mag"
+          ],
+          6
+        ],
+        "group": "Decision",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          },
+          "collator": {
+            "js": "0.45.0",
+            "android": "6.5.0",
+            "ios": "4.2.0"
+          }
+        }
+      },
+      "all": {
+        "doc": "Returns `true` if all the inputs are `true`, `false` otherwise. The inputs are evaluated in order, and evaluation is short-circuiting: once an input expression evaluates to `false`, the result is `false` and no further input expressions are evaluated.\n\n - [Display HTML clusters with custom properties](https://maplibre.org/maplibre-gl-js/docs/examples/display-html-clusters-with-custom-properties/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "...",
+                "input_n"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_i",
+              "type": "boolean"
+            }
+          ]
+        },
+        "example": [
+          "all",
+          [
+            ">=",
+            [
+              "get",
+              "mag"
+            ],
+            4
+          ],
+          [
+            "<",
+            [
+              "get",
+              "mag"
+            ],
+            5
+          ]
+        ],
+        "group": "Decision",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "any": {
+        "doc": "Returns `true` if any of the inputs are `true`, `false` otherwise. The inputs are evaluated in order, and evaluation is short-circuiting: once an input expression evaluates to `true`, the result is `true` and no further input expressions are evaluated.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "...",
+                "input_n"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_i",
+              "type": "boolean"
+            }
+          ]
+        },
+        "example": [
+          "any",
+          [
+            ">=",
+            [
+              "get",
+              "mag"
+            ],
+            4
+          ],
+          [
+            "<",
+            [
+              "get",
+              "mag"
+            ],
+            5
+          ]
+        ],
+        "group": "Decision",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "!": {
+        "doc": "Logical negation. Returns `true` if the input is `false`, and `false` if the input is `true`.\n\n - [Create and style clusters](https://maplibre.org/maplibre-gl-js/docs/examples/create-and-style-clusters/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "boolean"
+            }
+          ]
+        },
+        "example": [
+          "!",
+          [
+            "has",
+            "point_count"
+          ]
+        ],
+        "group": "Decision",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "within": {
+        "doc": "Returns `true` if the evaluated feature is fully contained inside a boundary of the input geometry, `false` otherwise. The input value can be a valid GeoJSON of type `Polygon`, `MultiPolygon`, `Feature`, or `FeatureCollection`. Supported features for evaluation:\n\n- `Point`: Returns `false` if a point is on the boundary or falls outside the boundary.\n\n- `LineString`: Returns `false` if any part of a line falls outside the boundary, the line intersects the boundary, or a line's endpoint is on the boundary.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "geojson"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "geojson",
+              "type": "GeoJSON object"
+            }
+          ]
+        },
+        "example": [
+          "within",
+          {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  0,
+                  0
+                ],
+                [
+                  0,
+                  5
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  5,
+                  0
+                ],
+                [
+                  0,
+                  0
+                ]
+              ]
+            ]
+          }
+        ],
+        "group": "Decision",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "1.9.0",
+            "android": "9.1.0",
+            "ios": "5.8.0"
+          }
+        }
+      },
+      "is-supported-script": {
+        "doc": "Returns `true` if the input string is expected to render legibly. Returns `false` if the input string contains sections that cannot be rendered without potential loss of meaning (e.g. Indic scripts that require complex text shaping, or right-to-left scripts if the `mapbox-gl-rtl-text` plugin is not in use in MapLibre GL JS).",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "boolean"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "string"
+            }
+          ]
+        },
+        "example": [
+          "is-supported-script",
+          "दिल्ली"
+        ],
+        "group": "String",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.45.0",
+            "android": "6.6.0",
+            "ios": "supported"
+          }
+        }
+      },
+      "upcase": {
+        "doc": "Returns the input string converted to uppercase. Follows the Unicode Default Case Conversion algorithm and the locale-insensitive case mappings in the Unicode Character Database.\n\n - [Change the case of labels](https://maplibre.org/maplibre-gl-js/docs/examples/change-case-of-labels/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "string"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "string"
+            }
+          ]
+        },
+        "example": [
+          "upcase",
+          [
+            "get",
+            "name"
+          ]
+        ],
+        "group": "String",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "downcase": {
+        "doc": "Returns the input string converted to lowercase. Follows the Unicode Default Case Conversion algorithm and the locale-insensitive case mappings in the Unicode Character Database.\n\n - [Change the case of labels](https://maplibre.org/maplibre-gl-js/docs/examples/change-case-of-labels/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input"
+              ],
+              "output-type": "string"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "string"
+            }
+          ]
+        },
+        "example": [
+          "downcase",
+          [
+            "get",
+            "name"
+          ]
+        ],
+        "group": "String",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "concat": {
+        "doc": "Returns a `string` consisting of the concatenation of the inputs. Each input is converted to a string as if by `to-string`.\n\n - [Add a generated icon to the map](https://maplibre.org/maplibre-gl-js/docs/examples/add-a-generated-icon-to-the-map/)\n\n - [Create a time slider](https://maplibre.org/maplibre-gl-js/docs/examples/create-a-time-slider/)\n\n - [Use a fallback image](https://maplibre.org/maplibre-gl-js/docs/examples/fallback-image/)\n\n - [Variable label placement](https://maplibre.org/maplibre-gl-js/docs/examples/variable-label-placement/)",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input_1",
+                "...",
+                "input_n"
+              ],
+              "output-type": "string"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input_i",
+              "type": "any"
+            }
+          ]
+        },
+        "example": [
+          "concat",
+          "square-rgb-",
+          [
+            "get",
+            "color"
+          ]
+        ],
+        "group": "String",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.41.0",
+            "android": "6.0.0",
+            "ios": "4.0.0"
+          }
+        }
+      },
+      "resolved-locale": {
+        "doc": "Returns the IETF language tag of the locale being used by the provided `collator`. This can be used to determine the default system locale, or to determine if a requested locale was successfully loaded.",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "collator"
+              ],
+              "output-type": "string"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "collator",
+              "type": "collator"
+            }
+          ]
+        },
+        "example": [
+          "resolved-locale",
+          [
+            "collator",
+            {
+              "case-sensitive": true,
+              "diacritic-sensitive": false,
+              "locale": "de"
+            }
+          ]
+        ],
+        "group": "String",
+        "sdk-support": {
+          "basic functionality": {
+            "js": "0.45.0",
+            "android": "6.5.0",
+            "ios": "4.2.0"
+          }
+        }
+      },
+      "split": {
+        "doc": "Returns an array of substrings formed by splitting an input string by a separator string.",
+        "group": "String",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input",
+                "separator"
+              ],
+              "output-type": "array<string>"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "string"
+            },
+            {
+              "name": "separator",
+              "type": "string"
+            }
+          ]
+        },
+        "example": [
+          "split",
+          [
+            "get",
+            "name"
+          ],
+          ";"
+        ],
+        "sdk-support": {
+          "basic functionality": {
+            "js": "5.20.0",
+            "android": "https://github.com/maplibre/maplibre-native/issues/4133",
+            "ios": "https://github.com/maplibre/maplibre-native/issues/4133"
+          }
+        }
+      },
+      "join": {
+        "doc": "Returns a string formed by concatenating the elements of the input array, inserting a separator between each element.",
+        "group": "String",
+        "syntax": {
+          "overloads": [
+            {
+              "parameters": [
+                "input",
+                "separator"
+              ],
+              "output-type": "string"
+            }
+          ],
+          "parameters": [
+            {
+              "name": "input",
+              "type": "array"
+            },
+            {
+              "name": "separator",
+              "type": "string"
+            }
+          ]
+        },
+        "example": [
+          "join",
+          [
+            "split",
+            [
+              "get",
+              "name"
+            ],
+            ";"
+          ],
+          "\n"
+        ],
+        "sdk-support": {
+          "basic functionality": {
+            "js": "5.20.0",
+            "android": "https://github.com/maplibre/maplibre-native/issues/4133",
+            "ios": "https://github.com/maplibre/maplibre-native/issues/4133"
+          }
+        }
+      }
+    }
+  },
+  "expression": {
+    "type": "array",
+    "value": "expression_name",
+    "minimum": 1,
+    "doc": "An expression defines a function that can be used for data-driven style properties or feature filters. The first element of an expression array is a string naming the expression operator, e.g. `\"*\"` or `\"case\"`. Elements that follow (if any) are the _arguments_ to the expression. Each argument is either a literal value (a string, number, boolean, or `null`), or another expression array."
+  },
+  "function": {
+    "expression": {
+      "type": "expression",
+      "doc": "An expression."
+    },
+    "stops": {
+      "type": "array",
+      "doc": "An array of stops.",
+      "value": "function_stop"
+    },
+    "base": {
+      "type": "number",
+      "default": 1,
+      "minimum": 0,
+      "doc": "The exponential base of the interpolation curve. It controls the rate at which the result increases. Higher values make the result increase more towards the high end of the range. With `1` the stops are interpolated linearly."
+    },
+    "property": {
+      "type": "string",
+      "doc": "The name of a feature property to use as the function input.",
+      "default": "$zoom"
+    },
+    "type": {
+      "type": "enum",
+      "values": {
+        "identity": {
+          "doc": "Return the input value as the output value."
+        },
+        "exponential": {
+          "doc": "Generate an output by interpolating between stops just less than and just greater than the function input."
+        },
+        "interval": {
+          "doc": "Return the output value of the stop just less than the function input."
+        },
+        "categorical": {
+          "doc": "Return the output value of the stop equal to the function input."
+        }
+      },
+      "doc": "The interpolation strategy to use in function evaluation.",
+      "default": "exponential"
+    },
+    "colorSpace": {
+      "type": "enum",
+      "values": {
+        "rgb": {
+          "doc": "Use the RGB color space to interpolate color values"
+        },
+        "lab": {
+          "doc": "Use the LAB color space to interpolate color values."
+        },
+        "hcl": {
+          "doc": "Use the HCL color space to interpolate color values, interpolating the Hue, Chroma, and Luminance channels individually."
+        }
+      },
+      "doc": "The color space in which colors interpolated. Interpolating colors in perceptual color spaces like LAB and HCL tend to produce color ramps that look more consistent and produce colors that can be differentiated more easily than those interpolated in RGB space.",
+      "default": "rgb"
+    },
+    "default": {
+      "type": "*",
+      "required": false,
+      "doc": "A value to serve as a fallback function result when a value isn't otherwise available. It is used in the following circumstances:\n\n* In categorical functions, when the feature value does not match any of the stop domain values.\n\n* In property and zoom-and-property functions, when a feature does not contain a value for the specified property.\n\n* In identity functions, when the feature value is not valid for the style property (for example, if the function is being used for a `circle-color` property but the feature property value is not a string or not a valid color).\n\n* In interval or exponential property and zoom-and-property functions, when the feature value is not numeric.\n\nIf no default is provided, the style property's default is used in these circumstances."
+    }
+  },
+  "function_stop": {
+    "type": "array",
+    "minimum": 0,
+    "maximum": 24,
+    "value": [
+      "number",
+      "color"
+    ],
+    "length": 2,
+    "doc": "Zoom level and value pair."
+  }
+}

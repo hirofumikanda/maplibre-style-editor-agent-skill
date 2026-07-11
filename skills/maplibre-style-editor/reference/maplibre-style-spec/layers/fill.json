@@ -1,0 +1,280 @@
+{
+  "layout_fill": {
+    "fill-sort-key": {
+      "type": "number",
+      "doc": "Sorts features in ascending order based on this value. Features with a higher sort key will appear above features with a lower sort key.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "1.2.0",
+          "android": "9.1.0",
+          "ios": "5.8.0"
+        },
+        "data-driven styling": {
+          "js": "1.2.0",
+          "android": "9.1.0",
+          "ios": "5.8.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "visibility": {
+      "type": "enum",
+      "values": {
+        "visible": {
+          "doc": "The layer is shown."
+        },
+        "none": {
+          "doc": "The layer is not shown."
+        }
+      },
+      "default": "visible",
+      "doc": "Whether this layer is displayed.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "`global state` expression": {
+          "js": "5.16.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/3302",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/3302"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "global-state"
+        ]
+      },
+      "property-type": "data-constant"
+    }
+  },
+  "paint_fill": {
+    "fill-antialias": {
+      "type": "boolean",
+      "default": true,
+      "doc": "Whether or not the fill should be antialiased.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "fill-opacity": {
+      "type": "number",
+      "default": 1,
+      "minimum": 0,
+      "maximum": 1,
+      "doc": "The opacity of the entire fill layer. In contrast to the `fill-color`, this value will also affect the 1px stroke around the fill, if the stroke is used.",
+      "transition": true,
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.21.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "fill-layer-opacity": {
+      "type": "number",
+      "default": 1,
+      "minimum": 0,
+      "maximum": 1,
+      "doc": "Opacity applied to the layer as a whole. Unlike `fill-opacity` and alpha values in `fill-color`, which are applied per feature and accumulate where fills overlap, `fill-layer-opacity` is applied once so overlapping fills appear as a single surface at the given opacity. When both `fill-opacity` and `fill-layer-opacity` are set, the per-feature, overlap accumulation is preserved, then `fill-layer-opacity` composites the result. This property affects only the layer it is set on and cannot be used to composite multiple layers together or control how this layer blends with layers above or below it.\n\n![fill-opacity vs. fill-layer-opacity](assets/fill-layer-opacity.svg)",
+      "transition": true,
+      "sdk-support": {
+        "basic functionality": {
+          "js": "6.0.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/4298",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/4298"
+        },
+        "`global state` expression": {
+          "js": "6.0.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/3302",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/3302"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "global-state"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "fill-color": {
+      "type": "color",
+      "default": "#000000",
+      "doc": "The color of the filled part of this layer. This color can be specified as `rgba` with an alpha component and the color's opacity will not affect the opacity of the 1px stroke, if it is used. When used with an SDF fill pattern, this serves as the foreground color of the pattern.",
+      "transition": true,
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.19.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "fill-outline-color": {
+      "type": "color",
+      "doc": "The outline color of the fill. Matches the value of `fill-color` if unspecified.",
+      "transition": true,
+      "requires": [
+        {
+          "!": "fill-pattern"
+        },
+        {
+          "fill-antialias": true
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.19.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "fill-translate": {
+      "type": "array",
+      "value": "number",
+      "length": 2,
+      "default": [
+        0,
+        0
+      ],
+      "transition": true,
+      "units": "pixels",
+      "doc": "The geometry's offset. Values are `[x, y]` where negatives indicate left and up, respectively.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "fill-translate-anchor": {
+      "type": "enum",
+      "values": {
+        "map": {
+          "doc": "The fill is translated relative to the map."
+        },
+        "viewport": {
+          "doc": "The fill is translated relative to the viewport."
+        }
+      },
+      "doc": "Controls the frame of reference for `fill-translate`.",
+      "default": "map",
+      "requires": [
+        "fill-translate"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "fill-pattern": {
+      "type": "resolvedImage",
+      "transition": true,
+      "doc": "Name of image in sprite to use for drawing image fills. For seamless patterns, image width and height must be a factor of two (2, 4, 8, ..., 512). Note that zoom-dependent expressions will be evaluated only at integer zoom levels.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.49.0",
+          "android": "6.5.0",
+          "ios": "4.4.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "cross-faded-data-driven"
+    }
+  }
+}

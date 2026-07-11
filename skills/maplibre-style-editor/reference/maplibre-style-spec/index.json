@@ -1,0 +1,19 @@
+{
+  "generatedFrom": "vendor/maplibre-style-spec/v8.json",
+  "files": [
+    "root.json",
+    "sources.json",
+    "expressions.json",
+    "other.json",
+    "layers/layer.json",
+    "layers/background.json",
+    "layers/fill.json",
+    "layers/line.json",
+    "layers/symbol.json",
+    "layers/raster.json",
+    "layers/circle.json",
+    "layers/fill-extrusion.json",
+    "layers/heatmap.json",
+    "layers/hillshade.json"
+  ]
+}

@@ -1,0 +1,1927 @@
+{
+  "layout_symbol": {
+    "symbol-placement": {
+      "type": "enum",
+      "values": {
+        "point": {
+          "doc": "The label is placed at the point where the geometry is located."
+        },
+        "line": {
+          "doc": "The label is placed along the line of the geometry. Can only be used on `LineString` and `Polygon` geometries."
+        },
+        "line-center": {
+          "doc": "The label is placed at the center of the line of the geometry. Can only be used on `LineString` and `Polygon` geometries. Note that a single feature in a vector tile may contain multiple line geometries."
+        }
+      },
+      "default": "point",
+      "doc": "Label placement relative to its geometry.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "`line-center` value": {
+          "js": "0.47.0",
+          "android": "6.4.0",
+          "ios": "4.3.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "symbol-spacing": {
+      "type": "number",
+      "default": 250,
+      "minimum": 1,
+      "units": "pixels",
+      "doc": "Distance between two symbol anchors.",
+      "requires": [
+        {
+          "symbol-placement": "line"
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "symbol-avoid-edges": {
+      "type": "boolean",
+      "default": false,
+      "doc": "If true, the symbols will not cross tile edges to avoid mutual collisions. Recommended in layers that don't have enough padding in the vector tile to prevent collisions, or if it is a point symbol layer placed after a line symbol layer. When using a client that supports global collision detection, like MapLibre GL JS version 0.42.0 or greater, enabling this property is not needed to prevent clipped labels at tile boundaries.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "symbol-sort-key": {
+      "type": "number",
+      "doc": "Sorts features in ascending order based on this value. Features with lower sort keys are drawn and placed first.  When `icon-allow-overlap` or `text-allow-overlap` is `false`, features with a lower sort key will have priority during placement. When `icon-allow-overlap` or `text-allow-overlap` is set to `true`, features with a higher sort key will overlap over features with a lower sort key.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.53.0",
+          "android": "7.4.0",
+          "ios": "4.11.0"
+        },
+        "data-driven styling": {
+          "js": "0.53.0",
+          "android": "7.4.0",
+          "ios": "4.11.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "symbol-z-order": {
+      "type": "enum",
+      "values": {
+        "auto": {
+          "doc": "Sorts symbols by `symbol-sort-key` if set. Otherwise, sorts symbols by their y-position relative to the viewport if `icon-allow-overlap` or `text-allow-overlap` is set to `true` or `icon-ignore-placement` or `text-ignore-placement` is `false`."
+        },
+        "viewport-y": {
+          "doc": "Sorts symbols by their y-position relative to the viewport if `icon-allow-overlap` or `text-allow-overlap` is set to `true` or `icon-ignore-placement` or `text-ignore-placement` is `false`."
+        },
+        "source": {
+          "doc": "Sorts symbols by `symbol-sort-key` if set. Otherwise, no sorting is applied; symbols are rendered in the same order as the source data."
+        }
+      },
+      "default": "auto",
+      "doc": "Determines whether overlapping symbols in the same layer are rendered in the order that they appear in the data source or by their y-position relative to the viewport. To control the order and prioritization of symbols otherwise, use `symbol-sort-key`.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.49.0",
+          "android": "6.6.0",
+          "ios": "4.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "icon-allow-overlap": {
+      "type": "boolean",
+      "default": false,
+      "doc": "If true, the icon will be visible even if it collides with other previously drawn symbols.",
+      "requires": [
+        "icon-image",
+        {
+          "!": "icon-overlap"
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "icon-overlap": {
+      "type": "enum",
+      "values": {
+        "never": {
+          "doc": "The icon will be hidden if it collides with any other previously drawn symbol."
+        },
+        "always": {
+          "doc": "The icon will be visible even if it collides with any other previously drawn symbol."
+        },
+        "cooperative": {
+          "doc": "If the icon collides with another previously drawn symbol, the overlap mode for that symbol is checked. If the previous symbol was placed using `never` overlap mode, the new icon is hidden. If the previous symbol was placed using `always` or `cooperative` overlap mode, the new icon is visible."
+        }
+      },
+      "doc": "Allows for control over whether to show an icon when it overlaps other symbols on the map. If `icon-overlap` is not set, `icon-allow-overlap` is used instead.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "2.1.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/251",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/251"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "icon-ignore-placement": {
+      "type": "boolean",
+      "default": false,
+      "doc": "If true, other symbols can be visible even if they collide with the icon.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "icon-optional": {
+      "type": "boolean",
+      "default": false,
+      "doc": "If true, text will display without their corresponding icons when the icon collides with other symbols and the text does not.",
+      "requires": [
+        "icon-image",
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "icon-rotation-alignment": {
+      "type": "enum",
+      "values": {
+        "map": {
+          "doc": "When `symbol-placement` is set to `point`, aligns icons east-west. When `symbol-placement` is set to `line` or `line-center`, aligns icon x-axes with the line."
+        },
+        "viewport": {
+          "doc": "Produces icons whose x-axes are aligned with the x-axis of the viewport, regardless of the value of `symbol-placement`."
+        },
+        "auto": {
+          "doc": "When `symbol-placement` is set to `point`, this is equivalent to `viewport`. When `symbol-placement` is set to `line` or `line-center`, this is equivalent to `map`."
+        }
+      },
+      "default": "auto",
+      "doc": "In combination with `symbol-placement`, determines the rotation behavior of icons.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "`auto` value": {
+          "js": "0.25.0",
+          "android": "4.2.0",
+          "ios": "3.4.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "icon-size": {
+      "type": "number",
+      "default": 1,
+      "minimum": 0,
+      "units": "factor of the original icon size",
+      "doc": "Scales the original size of the icon by the provided factor. The new pixel size of the image will be the original pixel size multiplied by `icon-size`. 1 is the original size; 3 triples the size of the image.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.35.0",
+          "android": "5.1.0",
+          "ios": "3.6.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "icon-text-fit": {
+      "type": "enum",
+      "values": {
+        "none": {
+          "doc": "The icon is displayed at its intrinsic aspect ratio."
+        },
+        "width": {
+          "doc": "The icon is scaled in the x-dimension to fit the width of the text."
+        },
+        "height": {
+          "doc": "The icon is scaled in the y-dimension to fit the height of the text."
+        },
+        "both": {
+          "doc": "The icon is scaled in both x- and y-dimensions."
+        }
+      },
+      "default": "none",
+      "doc": "Scales the icon to fit around the associated text.",
+      "requires": [
+        "icon-image",
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.21.0",
+          "android": "4.2.0",
+          "ios": "3.4.0"
+        },
+        "stretchable icons": {
+          "js": "1.6.0",
+          "android": "9.2.0",
+          "ios": "5.8.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "icon-text-fit-padding": {
+      "type": "array",
+      "value": "number",
+      "length": 4,
+      "default": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "units": "pixels",
+      "doc": "Size of the additional area added to dimensions determined by `icon-text-fit`, in clockwise order: top, right, bottom, left.",
+      "requires": [
+        "icon-image",
+        "text-field",
+        {
+          "icon-text-fit": [
+            "both",
+            "width",
+            "height"
+          ]
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.21.0",
+          "android": "4.2.0",
+          "ios": "3.4.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "icon-image": {
+      "type": "resolvedImage",
+      "doc": "Name of image in sprite to use for drawing an image background.",
+      "tokens": true,
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.35.0",
+          "android": "5.1.0",
+          "ios": "3.6.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "icon-rotate": {
+      "type": "number",
+      "default": 0,
+      "period": 360,
+      "units": "degrees",
+      "doc": "Rotates the icon clockwise.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.21.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "icon-padding": {
+      "type": "padding",
+      "default": [
+        2
+      ],
+      "units": "pixels",
+      "doc": "Size of additional area round the icon bounding box used for detecting symbol collisions.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "2.2.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/2754",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/2754"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "icon-keep-upright": {
+      "type": "boolean",
+      "default": false,
+      "doc": "If true, the icon may be flipped to prevent it from being rendered upside-down.",
+      "requires": [
+        "icon-image",
+        {
+          "icon-rotation-alignment": "map"
+        },
+        {
+          "symbol-placement": [
+            "line",
+            "line-center"
+          ]
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "icon-offset": {
+      "type": "array",
+      "value": "number",
+      "length": 2,
+      "default": [
+        0,
+        0
+      ],
+      "doc": "Offset distance of icon from its anchor. Positive values indicate right and down, while negative values indicate left and up. Each component is multiplied by the value of `icon-size` to obtain the final offset in pixels. When combined with `icon-rotate` the offset will be as if the rotated direction was up.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.29.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "icon-anchor": {
+      "type": "enum",
+      "values": {
+        "center": {
+          "doc": "The center of the icon is placed closest to the anchor."
+        },
+        "left": {
+          "doc": "The left side of the icon is placed closest to the anchor."
+        },
+        "right": {
+          "doc": "The right side of the icon is placed closest to the anchor."
+        },
+        "top": {
+          "doc": "The top of the icon is placed closest to the anchor."
+        },
+        "bottom": {
+          "doc": "The bottom of the icon is placed closest to the anchor."
+        },
+        "top-left": {
+          "doc": "The top left corner of the icon is placed closest to the anchor."
+        },
+        "top-right": {
+          "doc": "The top right corner of the icon is placed closest to the anchor."
+        },
+        "bottom-left": {
+          "doc": "The bottom left corner of the icon is placed closest to the anchor."
+        },
+        "bottom-right": {
+          "doc": "The bottom right corner of the icon is placed closest to the anchor."
+        }
+      },
+      "default": "center",
+      "doc": "Part of the icon placed closest to the anchor.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.40.0",
+          "android": "5.2.0",
+          "ios": "3.7.0"
+        },
+        "data-driven styling": {
+          "js": "0.40.0",
+          "android": "5.2.0",
+          "ios": "3.7.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "icon-pitch-alignment": {
+      "type": "enum",
+      "values": {
+        "map": {
+          "doc": "The icon is aligned to the plane of the map."
+        },
+        "viewport": {
+          "doc": "The icon is aligned to the plane of the viewport."
+        },
+        "auto": {
+          "doc": "Automatically matches the value of `icon-rotation-alignment`."
+        }
+      },
+      "default": "auto",
+      "doc": "Orientation of icon when map is pitched.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.39.0",
+          "android": "5.2.0",
+          "ios": "3.7.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "text-pitch-alignment": {
+      "type": "enum",
+      "values": {
+        "map": {
+          "doc": "The text is aligned to the plane of the map."
+        },
+        "viewport": {
+          "doc": "The text is aligned to the plane of the viewport."
+        },
+        "auto": {
+          "doc": "Automatically matches the value of `text-rotation-alignment`."
+        }
+      },
+      "default": "auto",
+      "doc": "Orientation of text when map is pitched.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.21.0",
+          "android": "4.2.0",
+          "ios": "3.4.0"
+        },
+        "`auto` value": {
+          "js": "0.25.0",
+          "android": "4.2.0",
+          "ios": "3.4.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "text-rotation-alignment": {
+      "type": "enum",
+      "values": {
+        "map": {
+          "doc": "When `symbol-placement` is set to `point`, aligns text east-west. When `symbol-placement` is set to `line` or `line-center`, aligns text x-axes with the line."
+        },
+        "viewport": {
+          "doc": "Produces glyphs whose x-axes are aligned with the x-axis of the viewport, regardless of the value of `symbol-placement`."
+        },
+        "viewport-glyph": {
+          "doc": "When `symbol-placement` is set to `point`, aligns text to the x-axis of the viewport. When `symbol-placement` is set to `line` or `line-center`, aligns glyphs to the x-axis of the viewport and places them along the line."
+        },
+        "auto": {
+          "doc": "When `symbol-placement` is set to `point`, this is equivalent to `viewport`. When `symbol-placement` is set to `line` or `line-center`, this is equivalent to `map`."
+        }
+      },
+      "default": "auto",
+      "doc": "In combination with `symbol-placement`, determines the rotation behavior of the individual glyphs forming the text.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "`auto` value": {
+          "js": "0.25.0",
+          "android": "4.2.0",
+          "ios": "3.4.0"
+        },
+        "`viewport-glyph` value": {
+          "js": "2.1.8",
+          "android": "https://github.com/maplibre/maplibre-native/issues/250",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/250"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "text-field": {
+      "type": "formatted",
+      "default": "",
+      "tokens": true,
+      "doc": "Value to use for a text label. If a plain `string` is provided, it will be treated as a `formatted` with default/inherited formatting options.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.33.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-font": {
+      "type": "array",
+      "value": "string",
+      "default": [
+        "Open Sans Regular",
+        "Arial Unicode MS Regular"
+      ],
+      "doc": "Fonts to use for displaying text. If the `glyphs` root property is specified, this array is joined together and interpreted as a font stack name. Otherwise, it is interpreted as a cascading fallback list of local font names.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.43.0",
+          "android": "6.0.0",
+          "ios": "4.0.0"
+        },
+        "local fonts": {
+          "js": "https://github.com/maplibre/maplibre-gl-js/issues/3302",
+          "android": "https://github.com/maplibre/maplibre-native/issues/165",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/165"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-size": {
+      "type": "number",
+      "default": 16,
+      "minimum": 0,
+      "units": "pixels",
+      "doc": "Font size.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.35.0",
+          "android": "5.1.0",
+          "ios": "3.6.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-max-width": {
+      "type": "number",
+      "default": 10,
+      "minimum": 0,
+      "units": "ems",
+      "doc": "The maximum line width for text wrapping.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.40.0",
+          "android": "5.2.0",
+          "ios": "3.7.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-line-height": {
+      "type": "number",
+      "default": 1.2,
+      "units": "ems",
+      "doc": "Text leading value for multi-line text.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "text-letter-spacing": {
+      "type": "number",
+      "default": 0,
+      "units": "ems",
+      "doc": "Text tracking amount.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.40.0",
+          "android": "5.2.0",
+          "ios": "3.7.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-justify": {
+      "type": "enum",
+      "values": {
+        "auto": {
+          "doc": "The text is aligned towards the anchor position."
+        },
+        "left": {
+          "doc": "The text is aligned to the left."
+        },
+        "center": {
+          "doc": "The text is centered."
+        },
+        "right": {
+          "doc": "The text is aligned to the right."
+        }
+      },
+      "default": "center",
+      "doc": "Text justification options.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.39.0",
+          "android": "5.2.0",
+          "ios": "3.7.0"
+        },
+        "auto": {
+          "js": "0.54.0",
+          "android": "7.4.0",
+          "ios": "4.10.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-radial-offset": {
+      "type": "number",
+      "units": "ems",
+      "default": 0,
+      "doc": "Radial offset of text, in the direction of the symbol's anchor. Useful in combination with `text-variable-anchor`, which defaults to using the two-dimensional `text-offset` if present.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.54.0",
+          "android": "7.4.0",
+          "ios": "4.10.0"
+        },
+        "data-driven styling": {
+          "js": "0.54.0",
+          "android": "7.4.0",
+          "ios": "4.10.0"
+        }
+      },
+      "requires": [
+        "text-field"
+      ],
+      "property-type": "data-driven",
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      }
+    },
+    "text-variable-anchor": {
+      "type": "array",
+      "value": "enum",
+      "values": {
+        "center": {
+          "doc": "The center of the text is placed closest to the anchor."
+        },
+        "left": {
+          "doc": "The left side of the text is placed closest to the anchor."
+        },
+        "right": {
+          "doc": "The right side of the text is placed closest to the anchor."
+        },
+        "top": {
+          "doc": "The top of the text is placed closest to the anchor."
+        },
+        "bottom": {
+          "doc": "The bottom of the text is placed closest to the anchor."
+        },
+        "top-left": {
+          "doc": "The top left corner of the text is placed closest to the anchor."
+        },
+        "top-right": {
+          "doc": "The top right corner of the text is placed closest to the anchor."
+        },
+        "bottom-left": {
+          "doc": "The bottom left corner of the text is placed closest to the anchor."
+        },
+        "bottom-right": {
+          "doc": "The bottom right corner of the text is placed closest to the anchor."
+        }
+      },
+      "requires": [
+        "text-field",
+        {
+          "symbol-placement": [
+            "point"
+          ]
+        }
+      ],
+      "doc": "To increase the chance of placing high-priority labels on the map, you can provide an array of `text-anchor` locations: the renderer will attempt to place the label at each location, in order, before moving onto the next label. Use `text-justify: auto` to choose justification based on anchor position. To apply an offset, use the `text-radial-offset` or the two-dimensional `text-offset`.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.54.0",
+          "android": "7.4.0",
+          "ios": "4.10.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "example": [
+        "center",
+        "left",
+        "right"
+      ],
+      "property-type": "data-constant"
+    },
+    "text-variable-anchor-offset": {
+      "type": "variableAnchorOffsetCollection",
+      "requires": [
+        "text-field",
+        {
+          "symbol-placement": [
+            "point"
+          ]
+        }
+      ],
+      "doc": "To increase the chance of placing high-priority labels on the map, you can provide an array of `text-anchor` locations, each paired with an offset value. The renderer will attempt to place the label at each location, in order, before moving on to the next location+offset. Use `text-justify: auto` to choose justification based on anchor position. \n\n The length of the array must be even, and must alternate between enum and point entries. i.e., each anchor location must be accompanied by a point, and that point defines the offset when the corresponding anchor location is used. Positive offset values indicate right and down, while negative values indicate left and up. Anchor locations may repeat, allowing the renderer to try multiple offsets to try and place a label using the same anchor. \n\n When present, this property takes precedence over `text-anchor`, `text-variable-anchor`, `text-offset`, and `text-radial-offset`. \n\n ```json \n\n { \"text-variable-anchor-offset\": [\"top\", [0, 4], \"left\", [3,0], \"bottom\", [1, 1]] } \n\n ``` \n\n When the renderer chooses the `top` anchor, `[0, 4]` will be used for `text-offset`; the text will be shifted down by 4 ems. \n\n When the renderer chooses the `left` anchor, `[3, 0]` will be used for `text-offset`; the text will be shifted right by 3 ems.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "3.3.0",
+          "ios": "6.8.0",
+          "android": "11.6.0"
+        },
+        "data-driven styling": {
+          "js": "3.3.0",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/2358",
+          "android": "https://github.com/maplibre/maplibre-native/issues/2358"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "example": [
+        "top",
+        [
+          0,
+          4
+        ],
+        "left",
+        [
+          3,
+          0
+        ],
+        "bottom",
+        [
+          1,
+          1
+        ]
+      ],
+      "property-type": "data-driven"
+    },
+    "text-anchor": {
+      "type": "enum",
+      "values": {
+        "center": {
+          "doc": "The center of the text is placed closest to the anchor."
+        },
+        "left": {
+          "doc": "The left side of the text is placed closest to the anchor."
+        },
+        "right": {
+          "doc": "The right side of the text is placed closest to the anchor."
+        },
+        "top": {
+          "doc": "The top of the text is placed closest to the anchor."
+        },
+        "bottom": {
+          "doc": "The bottom of the text is placed closest to the anchor."
+        },
+        "top-left": {
+          "doc": "The top left corner of the text is placed closest to the anchor."
+        },
+        "top-right": {
+          "doc": "The top right corner of the text is placed closest to the anchor."
+        },
+        "bottom-left": {
+          "doc": "The bottom left corner of the text is placed closest to the anchor."
+        },
+        "bottom-right": {
+          "doc": "The bottom right corner of the text is placed closest to the anchor."
+        }
+      },
+      "default": "center",
+      "doc": "Part of the text placed closest to the anchor.",
+      "requires": [
+        "text-field",
+        {
+          "!": "text-variable-anchor"
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.39.0",
+          "android": "5.2.0",
+          "ios": "3.7.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-max-angle": {
+      "type": "number",
+      "default": 45,
+      "units": "degrees",
+      "doc": "Maximum angle change between adjacent characters.",
+      "requires": [
+        "text-field",
+        {
+          "symbol-placement": [
+            "line",
+            "line-center"
+          ]
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "text-writing-mode": {
+      "type": "array",
+      "value": "enum",
+      "values": {
+        "horizontal": {
+          "doc": "If a text's language supports horizontal writing mode, symbols with point placement would be laid out horizontally."
+        },
+        "vertical": {
+          "doc": "If a text's language supports vertical writing mode, symbols with point placement would be laid out vertically."
+        }
+      },
+      "doc": "The property allows control over a symbol's orientation. Note that the property values act as a hint, so that a symbol whose language doesn’t support the provided orientation will be laid out in its natural orientation. Example: English point symbol will be rendered horizontally even if array value contains single 'vertical' enum value. The order of elements in an array define priority order for the placement of an orientation variant.",
+      "requires": [
+        "text-field",
+        {
+          "symbol-placement": [
+            "point"
+          ]
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "1.3.0",
+          "android": "8.3.0",
+          "ios": "5.3.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "text-rotate": {
+      "type": "number",
+      "default": 0,
+      "period": 360,
+      "units": "degrees",
+      "doc": "Rotates the text clockwise.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.35.0",
+          "android": "5.1.0",
+          "ios": "3.6.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-padding": {
+      "type": "number",
+      "default": 2,
+      "minimum": 0,
+      "units": "pixels",
+      "doc": "Size of the additional area around the text bounding box used for detecting symbol collisions.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "text-keep-upright": {
+      "type": "boolean",
+      "default": true,
+      "doc": "If true, the text may be flipped vertically to prevent it from being rendered upside-down.",
+      "requires": [
+        "text-field",
+        {
+          "text-rotation-alignment": "map"
+        },
+        {
+          "symbol-placement": [
+            "line",
+            "line-center"
+          ]
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "text-transform": {
+      "type": "enum",
+      "values": {
+        "none": {
+          "doc": "The text is not altered."
+        },
+        "uppercase": {
+          "doc": "Forces all letters to be displayed in uppercase."
+        },
+        "lowercase": {
+          "doc": "Forces all letters to be displayed in lowercase."
+        }
+      },
+      "default": "none",
+      "doc": "Specifies how to capitalize text, similar to the CSS `text-transform` property.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.33.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-offset": {
+      "type": "array",
+      "doc": "Offset distance of text from its anchor. Positive values indicate right and down, while negative values indicate left and up. If used with text-variable-anchor, input values will be taken as absolute values. Offsets along the x- and y-axis will be applied automatically based on the anchor position.",
+      "value": "number",
+      "units": "ems",
+      "length": 2,
+      "default": [
+        0,
+        0
+      ],
+      "requires": [
+        "text-field",
+        {
+          "!": "text-radial-offset"
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.35.0",
+          "android": "5.1.0",
+          "ios": "3.6.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-allow-overlap": {
+      "type": "boolean",
+      "default": false,
+      "doc": "If true, the text will be visible even if it collides with other previously drawn symbols.",
+      "requires": [
+        "text-field",
+        {
+          "!": "text-overlap"
+        }
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "text-overlap": {
+      "type": "enum",
+      "values": {
+        "never": {
+          "doc": "The text will be hidden if it collides with any other previously drawn symbol."
+        },
+        "always": {
+          "doc": "The text will be visible even if it collides with any other previously drawn symbol."
+        },
+        "cooperative": {
+          "doc": "If the text collides with another previously drawn symbol, the overlap mode for that symbol is checked. If the previous symbol was placed using `never` overlap mode, the new text is hidden. If the previous symbol was placed using `always` or `cooperative` overlap mode, the new text is visible."
+        }
+      },
+      "doc": "Allows for control over whether to show symbol text when it overlaps other symbols on the map. If `text-overlap` is not set, `text-allow-overlap` is used instead",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "2.1.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/251",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/251"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "text-ignore-placement": {
+      "type": "boolean",
+      "default": false,
+      "doc": "If true, other symbols can be visible even if they collide with the text.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "text-optional": {
+      "type": "boolean",
+      "default": false,
+      "doc": "If true, icons will display without their corresponding text when the text collides with other symbols and the icon does not.",
+      "requires": [
+        "text-field",
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "visibility": {
+      "type": "enum",
+      "values": {
+        "visible": {
+          "doc": "The layer is shown."
+        },
+        "none": {
+          "doc": "The layer is not shown."
+        }
+      },
+      "default": "visible",
+      "doc": "Whether this layer is displayed.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "`global state` expression": {
+          "js": "5.16.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/3302",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/3302"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "global-state"
+        ]
+      },
+      "property-type": "data-constant"
+    }
+  },
+  "paint_symbol": {
+    "icon-opacity": {
+      "doc": "The opacity at which the icon will be drawn.",
+      "type": "number",
+      "default": 1,
+      "minimum": 0,
+      "maximum": 1,
+      "transition": true,
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.33.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "icon-color": {
+      "type": "color",
+      "default": "#000000",
+      "transition": true,
+      "doc": "The color of the icon. This can only be used with SDF icons.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.33.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "icon-halo-color": {
+      "type": "color",
+      "default": "rgba(0, 0, 0, 0)",
+      "transition": true,
+      "doc": "The color of the icon's halo. Icon halos can only be used with SDF icons.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.33.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "icon-halo-width": {
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "transition": true,
+      "units": "pixels",
+      "doc": "Distance of halo to the icon outline. \n\nThe unit is in pixels only for SDF sprites that were created with a blur radius of 8, multiplied by the display density. I.e., the radius needs to be 16 for `@2x` sprites, etc.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.33.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "icon-halo-blur": {
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "transition": true,
+      "units": "pixels",
+      "doc": "Fade out the halo towards the outside.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.33.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "icon-translate": {
+      "type": "array",
+      "value": "number",
+      "length": 2,
+      "default": [
+        0,
+        0
+      ],
+      "transition": true,
+      "units": "pixels",
+      "doc": "Distance that the icon's anchor is moved from its original placement. Positive values indicate right and down, while negative values indicate left and up.",
+      "requires": [
+        "icon-image"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "icon-translate-anchor": {
+      "type": "enum",
+      "values": {
+        "map": {
+          "doc": "Icons are translated relative to the map."
+        },
+        "viewport": {
+          "doc": "Icons are translated relative to the viewport."
+        }
+      },
+      "doc": "Controls the frame of reference for `icon-translate`.",
+      "default": "map",
+      "requires": [
+        "icon-image",
+        "icon-translate"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "text-opacity": {
+      "type": "number",
+      "doc": "The opacity at which the text will be drawn.",
+      "default": 1,
+      "minimum": 0,
+      "maximum": 1,
+      "transition": true,
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.33.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-color": {
+      "type": "color",
+      "doc": "The color with which the text will be drawn.",
+      "default": "#000000",
+      "transition": true,
+      "overridable": true,
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.33.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-halo-color": {
+      "type": "color",
+      "default": "rgba(0, 0, 0, 0)",
+      "transition": true,
+      "doc": "The color of the text's halo, which helps it stand out from backgrounds.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.33.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-halo-width": {
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "transition": true,
+      "units": "pixels",
+      "doc": "Distance of halo to the font outline. Max text halo width is 1/4 of the font-size.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.33.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-halo-blur": {
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "transition": true,
+      "units": "pixels",
+      "doc": "The halo's fadeout distance towards the outside.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        },
+        "data-driven styling": {
+          "js": "0.33.0",
+          "android": "5.0.0",
+          "ios": "3.5.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom",
+          "feature",
+          "feature-state"
+        ]
+      },
+      "property-type": "data-driven"
+    },
+    "text-translate": {
+      "type": "array",
+      "value": "number",
+      "length": 2,
+      "default": [
+        0,
+        0
+      ],
+      "transition": true,
+      "units": "pixels",
+      "doc": "Distance that the text's anchor is moved from its original placement. Positive values indicate right and down, while negative values indicate left and up.",
+      "requires": [
+        "text-field"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "text-translate-anchor": {
+      "type": "enum",
+      "values": {
+        "map": {
+          "doc": "The text is translated relative to the map."
+        },
+        "viewport": {
+          "doc": "The text is translated relative to the viewport."
+        }
+      },
+      "doc": "Controls the frame of reference for `text-translate`.",
+      "default": "map",
+      "requires": [
+        "text-field",
+        "text-translate"
+      ],
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.10.0",
+          "android": "2.0.1",
+          "ios": "2.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    }
+  }
+}

@@ -1,0 +1,480 @@
+{
+  "source": [
+    "source_vector",
+    "source_raster",
+    "source_raster_dem",
+    "source_geojson",
+    "source_video",
+    "source_image"
+  ],
+  "source_vector": {
+    "type": {
+      "required": true,
+      "type": "enum",
+      "values": {
+        "vector": {
+          "doc": "A vector tile source."
+        }
+      },
+      "doc": "The type of the source."
+    },
+    "url": {
+      "type": "string",
+      "doc": "A URL to a TileJSON resource. Supported protocols are `http:` and `https:`."
+    },
+    "tiles": {
+      "type": "array",
+      "value": "string",
+      "doc": "An array of one or more tile source URLs, as in the TileJSON spec."
+    },
+    "bounds": {
+      "type": "array",
+      "value": "number",
+      "length": 4,
+      "default": [
+        -180,
+        -85.051129,
+        180,
+        85.051129
+      ],
+      "doc": "An array containing the longitude and latitude of the southwest and northeast corners of the source's bounding box in the following order: `[sw.lng, sw.lat, ne.lng, ne.lat]`. When this property is included in a source, no tiles outside of the given bounds are requested by MapLibre."
+    },
+    "scheme": {
+      "type": "enum",
+      "values": {
+        "xyz": {
+          "doc": "Slippy map tilenames scheme."
+        },
+        "tms": {
+          "doc": "OSGeo spec scheme."
+        }
+      },
+      "default": "xyz",
+      "doc": "Influences the y direction of the tile coordinates. The global-mercator (aka Spherical Mercator) profile is assumed."
+    },
+    "minzoom": {
+      "type": "number",
+      "default": 0,
+      "doc": "Minimum zoom level for which tiles are available, as in the TileJSON spec."
+    },
+    "maxzoom": {
+      "type": "number",
+      "default": 22,
+      "doc": "Maximum zoom level for which tiles are available, as in the TileJSON spec. Data from tiles at the maxzoom are used when displaying the map at higher zoom levels."
+    },
+    "attribution": {
+      "type": "string",
+      "doc": "Contains an attribution to be displayed when the map is shown to a user."
+    },
+    "promoteId": {
+      "type": "promoteId",
+      "doc": "A property to use as a feature id (for feature state). Either a property name, or an object of the form `{<sourceLayer>: <propertyName>}`. If specified as a string for a vector tile source, the same property is used across all its source layers."
+    },
+    "volatile": {
+      "type": "boolean",
+      "default": false,
+      "doc": "A setting to determine whether a source's tiles are cached locally.",
+      "sdk-support": {
+        "basic functionality": {
+          "android": "9.3.0",
+          "ios": "5.10.0",
+          "js": "wontfix"
+        }
+      }
+    },
+    "encoding": {
+      "type": "enum",
+      "values": {
+        "mvt": {
+          "doc": "Mapbox Vector Tiles. See http://github.com/mapbox/vector-tile-spec for more info."
+        },
+        "mlt": {
+          "doc": "MapLibre Vector Tiles. See https://github.com/maplibre/maplibre-tile-spec for more info."
+        }
+      },
+      "default": "mvt",
+      "doc": "The encoding used by this source. Mapbox Vector Tiles encoding is used by default.",
+      "sdk-support": {
+        "mvt": {
+          "android": "supported",
+          "ios": "supported",
+          "js": "supported"
+        },
+        "mlt": {
+          "android": "12.1.0",
+          "ios": "6.20.0",
+          "js": "5.12.0"
+        }
+      }
+    },
+    "*": {
+      "type": "*",
+      "doc": "Other keys to configure the data source."
+    }
+  },
+  "source_raster": {
+    "type": {
+      "required": true,
+      "type": "enum",
+      "values": {
+        "raster": {
+          "doc": "A raster tile source."
+        }
+      },
+      "doc": "The type of the source."
+    },
+    "url": {
+      "type": "string",
+      "doc": "A URL to a TileJSON resource. Supported protocols are `http:` and `https:`."
+    },
+    "tiles": {
+      "type": "array",
+      "value": "string",
+      "doc": "An array of one or more tile source URLs, as in the TileJSON spec."
+    },
+    "bounds": {
+      "type": "array",
+      "value": "number",
+      "length": 4,
+      "default": [
+        -180,
+        -85.051129,
+        180,
+        85.051129
+      ],
+      "doc": "An array containing the longitude and latitude of the southwest and northeast corners of the source's bounding box in the following order: `[sw.lng, sw.lat, ne.lng, ne.lat]`. When this property is included in a source, no tiles outside of the given bounds are requested by MapLibre."
+    },
+    "minzoom": {
+      "type": "number",
+      "default": 0,
+      "doc": "Minimum zoom level for which tiles are available, as in the TileJSON spec."
+    },
+    "maxzoom": {
+      "type": "number",
+      "default": 22,
+      "doc": "Maximum zoom level for which tiles are available, as in the TileJSON spec. Data from tiles at the maxzoom are used when displaying the map at higher zoom levels."
+    },
+    "tileSize": {
+      "type": "number",
+      "default": 512,
+      "units": "pixels",
+      "doc": "The minimum visual size to display tiles for this layer. Only configurable for raster layers."
+    },
+    "scheme": {
+      "type": "enum",
+      "values": {
+        "xyz": {
+          "doc": "Slippy map tilenames scheme."
+        },
+        "tms": {
+          "doc": "OSGeo spec scheme."
+        }
+      },
+      "default": "xyz",
+      "doc": "Influences the y direction of the tile coordinates. The global-mercator (aka Spherical Mercator) profile is assumed."
+    },
+    "attribution": {
+      "type": "string",
+      "doc": "Contains an attribution to be displayed when the map is shown to a user."
+    },
+    "volatile": {
+      "type": "boolean",
+      "default": false,
+      "doc": "A setting to determine whether a source's tiles are cached locally.",
+      "sdk-support": {
+        "basic functionality": {
+          "android": "9.3.0",
+          "ios": "5.10.0",
+          "js": "wontfix"
+        }
+      }
+    },
+    "*": {
+      "type": "*",
+      "doc": "Other keys to configure the data source."
+    }
+  },
+  "source_raster_dem": {
+    "type": {
+      "required": true,
+      "type": "enum",
+      "values": {
+        "raster-dem": {
+          "doc": "A RGB-encoded raster DEM source"
+        }
+      },
+      "doc": "The type of the source."
+    },
+    "url": {
+      "type": "string",
+      "doc": "A URL to a TileJSON resource. Supported protocols are `http:` and `https:`."
+    },
+    "tiles": {
+      "type": "array",
+      "value": "string",
+      "doc": "An array of one or more tile source URLs, as in the TileJSON spec."
+    },
+    "bounds": {
+      "type": "array",
+      "value": "number",
+      "length": 4,
+      "default": [
+        -180,
+        -85.051129,
+        180,
+        85.051129
+      ],
+      "doc": "An array containing the longitude and latitude of the southwest and northeast corners of the source's bounding box in the following order: `[sw.lng, sw.lat, ne.lng, ne.lat]`. When this property is included in a source, no tiles outside of the given bounds are requested by MapLibre."
+    },
+    "minzoom": {
+      "type": "number",
+      "default": 0,
+      "doc": "Minimum zoom level for which tiles are available, as in the TileJSON spec."
+    },
+    "maxzoom": {
+      "type": "number",
+      "default": 22,
+      "doc": "Maximum zoom level for which tiles are available, as in the TileJSON spec. Data from tiles at the maxzoom are used when displaying the map at higher zoom levels."
+    },
+    "tileSize": {
+      "type": "number",
+      "default": 512,
+      "units": "pixels",
+      "doc": "The minimum visual size to display tiles for this layer. Only configurable for raster layers."
+    },
+    "attribution": {
+      "type": "string",
+      "doc": "Contains an attribution to be displayed when the map is shown to a user."
+    },
+    "encoding": {
+      "type": "enum",
+      "values": {
+        "terrarium": {
+          "doc": "Terrarium format PNG tiles. See https://aws.amazon.com/es/public-datasets/terrain/ for more info."
+        },
+        "mapbox": {
+          "doc": "Mapbox Terrain RGB tiles. See https://www.mapbox.com/help/access-elevation-data/#mapbox-terrain-rgb for more info."
+        },
+        "custom": {
+          "doc": "Decodes tiles using the redFactor, blueFactor, greenFactor, baseShift parameters."
+        }
+      },
+      "default": "mapbox",
+      "doc": "The encoding used by this source. Mapbox Terrain RGB is used by default.",
+      "sdk-support": {
+        "mapbox, terrarium": {
+          "js": "0.43.0",
+          "ios": "6.0.0",
+          "android": "6.0.0"
+        },
+        "custom": {
+          "js": "3.4.0",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/2783",
+          "android": "https://github.com/maplibre/maplibre-native/issues/2783"
+        }
+      }
+    },
+    "redFactor": {
+      "type": "number",
+      "default": 1,
+      "doc": "Value that will be multiplied by the red channel value when decoding. Only used on custom encodings.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "3.4.0",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/2783",
+          "android": "https://github.com/maplibre/maplibre-native/issues/2783"
+        }
+      }
+    },
+    "blueFactor": {
+      "type": "number",
+      "default": 1,
+      "doc": "Value that will be multiplied by the blue channel value when decoding. Only used on custom encodings.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "3.4.0",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/2783",
+          "android": "https://github.com/maplibre/maplibre-native/issues/2783"
+        }
+      }
+    },
+    "greenFactor": {
+      "type": "number",
+      "default": 1,
+      "doc": "Value that will be multiplied by the green channel value when decoding. Only used on custom encodings.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "3.4.0",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/2358",
+          "android": "https://github.com/maplibre/maplibre-native/issues/2783"
+        }
+      }
+    },
+    "baseShift": {
+      "type": "number",
+      "default": 0,
+      "doc": "Value that will be added to the encoding mix when decoding. Only used on custom encodings.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "3.4.0",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/2783",
+          "android": "https://github.com/maplibre/maplibre-native/issues/2783"
+        }
+      }
+    },
+    "volatile": {
+      "type": "boolean",
+      "default": false,
+      "doc": "A setting to determine whether a source's tiles are cached locally.",
+      "sdk-support": {
+        "basic functionality": {
+          "android": "9.3.0",
+          "ios": "5.10.0",
+          "js": "wontfix"
+        }
+      }
+    },
+    "*": {
+      "type": "*",
+      "doc": "Other keys to configure the data source."
+    }
+  },
+  "source_geojson": {
+    "type": {
+      "required": true,
+      "type": "enum",
+      "values": {
+        "geojson": {
+          "doc": "A GeoJSON data source."
+        }
+      },
+      "doc": "The data type of the GeoJSON source."
+    },
+    "data": {
+      "required": true,
+      "type": "*",
+      "doc": "A URL to a GeoJSON file, or inline GeoJSON."
+    },
+    "maxzoom": {
+      "type": "number",
+      "default": 18,
+      "doc": "Maximum zoom level at which to create vector tiles (higher means greater detail at high zoom levels)."
+    },
+    "attribution": {
+      "type": "string",
+      "doc": "Contains an attribution to be displayed when the map is shown to a user."
+    },
+    "buffer": {
+      "type": "number",
+      "default": 128,
+      "maximum": 512,
+      "minimum": 0,
+      "doc": "Size of the tile buffer on each side. A value of 0 produces no buffer. A value of 512 produces a buffer as wide as the tile itself. Larger values produce fewer rendering artifacts near tile edges and slower performance."
+    },
+    "filter": {
+      "type": "filter",
+      "doc": "An expression for filtering features prior to processing them for rendering."
+    },
+    "tolerance": {
+      "type": "number",
+      "default": 0.375,
+      "doc": "Douglas-Peucker simplification tolerance (higher means simpler geometries and faster performance)."
+    },
+    "cluster": {
+      "type": "boolean",
+      "default": false,
+      "doc": "If the data is a collection of point features, setting this to true clusters the points by radius into groups. Cluster groups become new `Point` features in the source with additional properties:\n\n * `cluster` Is `true` if the point is a cluster \n\n * `cluster_id` A unique id for the cluster to be used in conjunction with the [cluster inspection methods](https://maplibre.org/maplibre-gl-js/docs/API/classes/GeoJSONSource/#getclusterexpansionzoom)\n\n * `point_count` Number of original points grouped into this cluster\n\n * `point_count_abbreviated` An abbreviated point count"
+    },
+    "clusterRadius": {
+      "type": "number",
+      "default": 50,
+      "minimum": 0,
+      "doc": "Radius of each cluster if clustering is enabled. A value of 512 indicates a radius equal to the width of a tile."
+    },
+    "clusterMaxZoom": {
+      "type": "number",
+      "doc": "Max zoom on which to cluster points if clustering is enabled. Defaults to one zoom less than maxzoom (so that last zoom features are not clustered). Clusters are re-evaluated at integer zoom levels so setting clusterMaxZoom to 14 means the clusters will be displayed until z15."
+    },
+    "clusterMinPoints": {
+      "type": "number",
+      "doc": "Minimum number of points necessary to form a cluster if clustering is enabled. Defaults to `2`."
+    },
+    "clusterProperties": {
+      "type": "*",
+      "doc": "An object defining custom properties on the generated clusters if clustering is enabled, aggregating values from clustered points. Has the form `{\"property_name\": [operator, map_expression]}`. `operator` is any expression function that accepts at least 2 operands (e.g. `\"+\"` or `\"max\"`) - it accumulates the property value from clusters/points the cluster contains; `map_expression` produces the value of a single point.\n\nExample: `{\"sum\": [\"+\", [\"get\", \"scalerank\"]]}`.\n\nFor more advanced use cases, in place of `operator`, you can use a custom reduce expression that references a special `[\"accumulated\"]` value, e.g.:\n\n`{\"sum\": [[\"+\", [\"accumulated\"], [\"get\", \"sum\"]], [\"get\", \"scalerank\"]]}`"
+    },
+    "lineMetrics": {
+      "type": "boolean",
+      "default": false,
+      "doc": "Whether to calculate line distance metrics. This is required for line layers that specify `line-gradient` values."
+    },
+    "generateId": {
+      "type": "boolean",
+      "default": false,
+      "doc": "Whether to generate ids for the geojson features. When enabled, the `feature.id` property will be auto assigned based on its index in the `features` array, over-writing any previous values."
+    },
+    "promoteId": {
+      "type": "promoteId",
+      "doc": "A property to use as a feature id (for feature state). Either a property name, or an object of the form `{<sourceLayer>: <propertyName>}`."
+    }
+  },
+  "source_image": {
+    "type": {
+      "required": true,
+      "type": "enum",
+      "values": {
+        "image": {
+          "doc": "An image data source."
+        }
+      },
+      "doc": "The data type of the image source."
+    },
+    "url": {
+      "required": true,
+      "type": "string",
+      "doc": "URL that points to an image."
+    },
+    "coordinates": {
+      "required": true,
+      "doc": "Corners of image specified in longitude, latitude pairs.",
+      "type": "array",
+      "length": 4,
+      "value": {
+        "type": "array",
+        "length": 2,
+        "value": "number",
+        "doc": "A single longitude, latitude pair."
+      }
+    }
+  },
+  "source_video": {
+    "type": {
+      "required": true,
+      "type": "enum",
+      "values": {
+        "video": {
+          "doc": "A video data source."
+        }
+      },
+      "doc": "The data type of the video source."
+    },
+    "urls": {
+      "required": true,
+      "type": "array",
+      "value": "string",
+      "doc": "URLs to video content in order of preferred format."
+    },
+    "coordinates": {
+      "required": true,
+      "doc": "Corners of video specified in longitude, latitude pairs.",
+      "type": "array",
+      "length": 4,
+      "value": {
+        "type": "array",
+        "length": 2,
+        "value": "number",
+        "doc": "A single longitude, latitude pair."
+      }
+    }
+  }
+}

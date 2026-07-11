@@ -1,0 +1,274 @@
+{
+  "layout_hillshade": {
+    "visibility": {
+      "type": "enum",
+      "values": {
+        "visible": {
+          "doc": "The layer is shown."
+        },
+        "none": {
+          "doc": "The layer is not shown."
+        }
+      },
+      "default": "visible",
+      "doc": "Whether this layer is displayed.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.43.0",
+          "android": "6.0.0",
+          "ios": "4.0.0"
+        },
+        "`global state` expression": {
+          "js": "5.16.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/3302",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/3302"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "global-state"
+        ]
+      },
+      "property-type": "data-constant"
+    }
+  },
+  "paint_hillshade": {
+    "hillshade-illumination-direction": {
+      "type": "numberArray",
+      "default": 335,
+      "minimum": 0,
+      "maximum": 359,
+      "doc": "The direction of the light source(s) used to generate the hillshading with 0 as the top of the viewport if `hillshade-illumination-anchor` is set to `viewport` and due north if `hillshade-illumination-anchor` is set to `map`. Only when `hillshade-method` is set to `multidirectional` can you specify multiple light sources.",
+      "transition": false,
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.43.0",
+          "android": "6.0.0",
+          "ios": "4.0.0"
+        },
+        "multidirectional": {
+          "js": "5.5.0",
+          "android": "13.0.0",
+          "ios": "6.24.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "hillshade-illumination-altitude": {
+      "type": "numberArray",
+      "default": 45,
+      "minimum": 0,
+      "maximum": 90,
+      "doc": "The altitude of the light source(s) used to generate the hillshading with 0 as sunset and 90 as noon. Only when `hillshade-method` is set to `multidirectional` can you specify multiple light sources.",
+      "transition": false,
+      "sdk-support": {
+        "basic functionality": {
+          "js": "5.5.0",
+          "android": "13.0.0",
+          "ios": "6.24.0"
+        },
+        "multidirectional": {
+          "js": "5.5.0",
+          "android": "13.0.0",
+          "ios": "6.24.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "hillshade-illumination-anchor": {
+      "type": "enum",
+      "values": {
+        "map": {
+          "doc": "The hillshade illumination is relative to the north direction."
+        },
+        "viewport": {
+          "doc": "The hillshade illumination is relative to the top of the viewport."
+        }
+      },
+      "default": "viewport",
+      "doc": "Direction of light source when map is rotated.",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.43.0",
+          "android": "6.0.0",
+          "ios": "4.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "hillshade-exaggeration": {
+      "type": "number",
+      "doc": "Intensity of the hillshade",
+      "default": 0.5,
+      "minimum": 0,
+      "maximum": 1,
+      "transition": true,
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.43.0",
+          "android": "6.0.0",
+          "ios": "4.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "hillshade-shadow-color": {
+      "type": "colorArray",
+      "default": "#000000",
+      "doc": "The shading color of areas that face away from the light source(s). Only when `hillshade-method` is set to `multidirectional` can you specify multiple light sources.",
+      "transition": true,
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.43.0",
+          "android": "6.0.0",
+          "ios": "4.0.0"
+        },
+        "multidirectional": {
+          "js": "5.5.0",
+          "android": "13.0.0",
+          "ios": "6.24.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "hillshade-highlight-color": {
+      "type": "colorArray",
+      "default": "#FFFFFF",
+      "doc": "The shading color of areas that faces towards the light source(s). Only when `hillshade-method` is set to `multidirectional` can you specify multiple light sources.",
+      "transition": true,
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.43.0",
+          "android": "6.0.0",
+          "ios": "4.0.0"
+        },
+        "multidirectional": {
+          "js": "5.5.0",
+          "android": "13.0.0",
+          "ios": "6.24.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "hillshade-accent-color": {
+      "type": "color",
+      "default": "#000000",
+      "doc": "The shading color used to accentuate rugged terrain like sharp cliffs and gorges.",
+      "transition": true,
+      "sdk-support": {
+        "basic functionality": {
+          "js": "0.43.0",
+          "android": "6.0.0",
+          "ios": "4.0.0"
+        }
+      },
+      "expression": {
+        "interpolated": true,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "hillshade-method": {
+      "type": "enum",
+      "values": {
+        "standard": {
+          "doc": "The legacy hillshade method."
+        },
+        "basic": {
+          "doc": "Basic hillshade. Uses a simple physics model where the reflected light intensity is proportional to the cosine of the angle between the incident light and the surface normal. Similar to GDAL's `gdaldem` default algorithm."
+        },
+        "combined": {
+          "doc": "Hillshade algorithm whose intensity scales with slope. Similar to GDAL's `gdaldem` with `-combined` option."
+        },
+        "igor": {
+          "doc": "Hillshade algorithm which tries to minimize effects on other map features beneath. Similar to GDAL's `gdaldem` with `-igor` option."
+        },
+        "multidirectional": {
+          "doc": "Hillshade with multiple illumination directions. Uses the basic hillshade model with multiple independent light sources."
+        }
+      },
+      "default": "standard",
+      "doc": "The hillshade algorithm to use, one of `standard`, `basic`, `combined`, `igor`, or `multidirectional`.\n![Visual comparison of standard, basic, igor, combined, and multidirectional hillshade-method](assets/hillshade_methods.png)",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "5.5.0",
+          "android": "13.0.0",
+          "ios": "6.24.0"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    },
+    "resampling": {
+      "type": "enum",
+      "doc": "The resampling/interpolation method to use for overscaling, also known as texture magnification filter.\n![Visual comparison of linear resampling versus nearest resampling](assets/resampling.png)",
+      "values": {
+        "linear": {
+          "doc": "(Bi)linear filtering interpolates pixel values using the weighted average of the four closest original source pixels creating a smooth but blurry look when overscaled"
+        },
+        "nearest": {
+          "doc": "Nearest neighbor filtering interpolates pixel values using the nearest original source pixel creating a sharp but pixelated look when overscaled"
+        }
+      },
+      "default": "linear",
+      "sdk-support": {
+        "basic functionality": {
+          "js": "5.20.0",
+          "android": "https://github.com/maplibre/maplibre-native/issues/4117",
+          "ios": "https://github.com/maplibre/maplibre-native/issues/4117"
+        }
+      },
+      "expression": {
+        "interpolated": false,
+        "parameters": [
+          "zoom"
+        ]
+      },
+      "property-type": "data-constant"
+    }
+  }
+}
