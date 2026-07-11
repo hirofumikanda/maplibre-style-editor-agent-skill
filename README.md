@@ -2,13 +2,7 @@
 
 MapLibre のスタイル JSON を編集する際に、ローカルの MapLibre Style Specification を常に参照しながら作業できる、エージェントスキルキットです。
 
-## インストール
-
-依存パッケージをインストールします。
-
-```bash
-npm install
-```
+## リファレンスファイルの生成
 
 最新の [MapLibre スタイルスペック](https://maplibre.org/maplibre-style-spec/) を取得し、ローカルのリファレンスファイルを生成します。
 

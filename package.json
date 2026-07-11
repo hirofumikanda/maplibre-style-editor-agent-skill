@@ -5,8 +5,5 @@
   "scripts": {
     "fetch-spec": "node scripts/fetch-style-spec.mjs",
     "extract-spec": "node scripts/extract-style-spec.mjs"
-  },
-  "dependencies": {
-    "@maplibre/maplibre-gl-style-spec": "latest"
   }
 }
