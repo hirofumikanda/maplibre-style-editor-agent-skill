@@ -127,6 +127,13 @@ Source を編集する場合は、
 
 編集完了後は必ず Style Validation を行います。
 
+バリデーションスクリプトの実行には `maplibre-gl-style-spec` パッケージが必要です。
+未インストールの場合は、先にインストールしてください。
+
+```bash
+npm install
+```
+
 実行例
 
 ```bash

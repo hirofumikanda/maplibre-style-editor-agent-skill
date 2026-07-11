@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises';
-import { validateStyle } from '@maplibre/maplibre-gl-style-spec';
+import { validateStyleMin as validateStyle } from '@maplibre/maplibre-gl-style-spec';
 
 const file = process.argv[2];
 if (!file) {
